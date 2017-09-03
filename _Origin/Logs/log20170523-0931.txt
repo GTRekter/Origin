@@ -1,0 +1,54 @@
+2017-05-23 09:31:00,153 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
+2017-05-23 09:31:00,156 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] directoryInfo: E:\Development\R_D\FileExtractor\FileExtractor\FileExtractor\Temp
+2017-05-23 09:31:00,156 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] fileNames: asdasd.zip, Db.sdf
+2017-05-23 09:31:00,156 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
+2017-05-23 09:31:00,160 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Start
+2017-05-23 09:31:00,160 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Company: Company
+2017-05-23 09:31:00,160 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Email: das.dasd.asd
+2017-05-23 09:31:00,161 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Type: MetadataAndFiles
+2017-05-23 09:31:00,161 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filename: dasd
+2017-05-23 09:31:00,161 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: ID,  SharepointName: ID, SharepointType: Counter, Value: 
+2017-05-23 09:31:00,161 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT01,  SharepointName: SAP_PROF_TEXT01, SharepointType: Text, Value: 
+2017-05-23 09:31:00,161 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: DocumentDateFrom,  SharepointName: SAP_PROF_DATE02, SharepointType: DateTime, Value: 
+2017-05-23 09:31:00,161 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: DocumentDateTo,  SharepointName: SAP_PROF_DATE02, SharepointType: DateTime, Value: 
+2017-05-23 09:31:00,161 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT04,  SharepointName: SAP_PROF_TEXT04, SharepointType: Text, Value: 
+2017-05-23 09:31:00,161 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT02,  SharepointName: SAP_PROF_TEXT02, SharepointType: Text, Value: 
+2017-05-23 09:31:00,161 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT03,  SharepointName: SAP_PROF_TEXT03, SharepointType: Text, Value: 
+2017-05-23 09:31:00,161 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: ClientCode,  SharepointName: ADR_CLIENTE, SharepointType: Text, Value: 
+2017-05-23 09:31:00,161 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT05,  SharepointName: SAP_PROF_TEXT05, SharepointType: Text, Value: 2014
+2017-05-23 09:31:00,724 DEBUG FileExtractor.Service.SharepointService – Items.Count20
+2017-05-23 09:31:00,724 DEBUG FileExtractor.Service.SharepointService – [exportAsyncDocumentsAndMetadata] Start
+2017-05-23 09:31:01,246 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 0 from SharePoint with ID: 8885
+2017-05-23 09:31:01,618 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 1 from SharePoint with ID: 8897
+2017-05-23 09:31:01,977 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 2 from SharePoint with ID: 8927
+2017-05-23 09:31:02,355 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 3 from SharePoint with ID: 8929
+2017-05-23 09:31:02,725 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 4 from SharePoint with ID: 9126
+2017-05-23 09:31:03,100 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 5 from SharePoint with ID: 9129
+2017-05-23 09:31:03,477 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 6 from SharePoint with ID: 9283
+2017-05-23 09:31:03,859 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 7 from SharePoint with ID: 9577
+2017-05-23 09:31:04,248 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 8 from SharePoint with ID: 9595
+2017-05-23 09:31:04,682 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 9 from SharePoint with ID: 9710
+2017-05-23 09:31:05,127 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 10 from SharePoint with ID: 9928
+2017-05-23 09:31:08,284 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 11 from SharePoint with ID: 9965
+2017-05-23 09:31:08,761 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 12 from SharePoint with ID: 9979
+2017-05-23 09:31:09,153 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 13 from SharePoint with ID: 9994
+2017-05-23 09:31:09,556 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 14 from SharePoint with ID: 10079
+2017-05-23 09:31:09,935 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 15 from SharePoint with ID: 13187
+2017-05-23 09:31:10,317 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 16 from SharePoint with ID: 14182
+2017-05-23 09:31:10,719 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 17 from SharePoint with ID: 14188
+2017-05-23 09:31:11,143 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 18 from SharePoint with ID: 15053
+2017-05-23 09:31:11,555 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 19 from SharePoint with ID: 15055
+2017-05-23 09:31:12,488 DEBUG FileExtractor.Service.SharepointService – [exportAsyncDocumentsAndMetadata] End
+2017-05-23 09:31:12,510 ERROR FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Error:The specified string is not in the form required for an e-mail address.   at System.Net.Mail.MailAddressParser.ReadCfwsAndThrowIfIncomplete(String data, Int32 index)
+   at System.Net.Mail.MailAddressParser.ParseDomain(String data, Int32& index)
+   at System.Net.Mail.MailAddressParser.ParseAddress(String data, Boolean expectMultipleAddresses, Int32& index)
+   at System.Net.Mail.MailAddressParser.ParseMultipleAddresses(String data)
+   at System.Net.Mail.MailAddressCollection.ParseValue(String addresses)
+   at System.Net.Mail.MailAddressCollection.Add(String addresses)
+   at System.Net.Mail.Message..ctor(String from, String to)
+   at System.Net.Mail.MailMessage..ctor(String from, String to)
+   at FileExtractor.Service.SharepointService.ExportAsyncDocuments(ExportAsyncDocumentsRequest request)
+2017-05-23 09:31:12,510 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] End
+2017-05-23 09:31:19,892 ERROR FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Error:Failure sending mail.   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at FileExtractor.Service.SharepointService.ExportAsyncDocuments(ExportAsyncDocumentsRequest request)
+2017-05-23 09:31:19,892 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] End

@@ -1,0 +1,3 @@
+2017-05-23 10:44:07,594 ERROR FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Error:Failure sending mail.   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at FileExtractor.Service.SharepointService.ExportAsyncDocuments(ExportAsyncDocumentsRequest request)
+2017-05-23 10:44:07,607 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] End

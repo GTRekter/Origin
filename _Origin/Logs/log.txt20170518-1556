@@ -1,0 +1,43 @@
+2017-05-18 15:56:44,134 DEBUG FileExtractor.Service.SharepointService – Query: <View Scope='RecursiveAll'>  
+                                <Query> 
+                                    <Where><And><Gt>
+                            <FieldRef Name='SAP_PROF_DATE02' />
+                            <Value Type='DateTime'>
+                                2016-12-31T23:00:00Z
+                            </Value> 
+                        </Gt><And><Leq>
+                            <FieldRef Name='SAP_PROF_DATE02' />
+                            <Value Type='DateTime'>
+                                2017-12-30T23:00:00Z
+                            </Value> 
+                        </Leq><And><Eq>
+                        <FieldRef Name='SAP_PROF_TEXT06'/>
+                        <Value Type='Text'>0070</Value>
+                    </Eq><Eq>
+                        <FieldRef Name='FSObjType'/>
+                        <Value Type='Lookup'>0</Value>
+                    </Eq></And></And></And></Where>
+                                </Query>  
+                                <ViewFields>
+                                    <FieldRef Name='ID'/>
+                                    <FieldRef Name='IDDoc'/>
+                                    <FieldRef Name='Title'/>
+                                    <FieldRef Name='SAP_PROF_TEXT01'/>
+                                    <FieldRef Name='SAP_PROF_TEXT02'/>
+                                    <FieldRef Name='SAP_PROF_TEXT03'/>
+                                    <FieldRef Name='SAP_PROF_TEXT04'/>
+                                    <FieldRef Name='SAP_PROF_TEXT05'/>
+                                    <FieldRef Name='SAP_PROF_TEXT06'/>
+                                    <FieldRef Name='SAP_PROF_TEXT07'/>
+                                    <FieldRef Name='LOTTO_ARCH'/>
+                                    <FieldRef Name='SAP_PROF_DATE02'/>
+                                    <FieldRef Name='FileRef'/>
+                                    <FieldRef Name='FileLeafRef'/>
+                                    <FieldRef Name='DOCNAME'/>
+                                    <FieldRef Name='ADR_CLIENTE'/>
+                                    <FieldRef Name='Nome'/>
+                                    <FieldRef Name='Cognome'/>
+                                </ViewFields><RowLimit>10</RowLimit></View>
+2017-05-18 15:56:44,838 DEBUG FileExtractor.Service.SharepointService – Items.Count: 10
+2017-05-18 15:56:54,614 DEBUG FileExtractor.Service.SharepointService – Items.Count11
+2017-05-18 15:56:54,614 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] End

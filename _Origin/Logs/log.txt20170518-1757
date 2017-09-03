@@ -1,0 +1,5 @@
+2017-05-18 17:57:43,012 DEBUG FileExtractor.Service.SharepointService – [Export] Start
+2017-05-18 17:57:43,017 DEBUG FileExtractor.Service.SharepointService – [Export] DocumentsIds: 23584
+2017-05-18 17:57:43,017 DEBUG FileExtractor.Service.SharepointService – [Export] Type: MetadataAndFiles
+2017-05-18 17:57:43,017 DEBUG FileExtractor.Service.SharepointService – [Export] Filename: Test2
+2017-05-18 17:57:43,017 DEBUG FileExtractor.Service.SharepointService – [exportDocumentsAndMetadata] Start

@@ -1,0 +1,38 @@
+2017-05-22 18:11:20,128 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
+2017-05-22 18:11:20,132 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] directoryInfo: E:\
+2017-05-22 18:11:20,132 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] fileNames: 
+2017-05-22 18:11:20,132 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
+2017-05-22 18:11:20,138 DEBUG FileExtractor.Service.SharepointService – [Export] Start
+2017-05-22 18:11:20,138 DEBUG FileExtractor.Service.SharepointService – [Export] DocumentsIds: 17567
+2017-05-22 18:11:20,138 DEBUG FileExtractor.Service.SharepointService – [Export] Type: MetadataAndFiles
+2017-05-22 18:11:20,138 DEBUG FileExtractor.Service.SharepointService – [Export] Filename: ASV
+2017-05-22 18:11:20,152 DEBUG FileExtractor.Service.SharepointService – [exportDocumentsAndMetadata] Start
+2017-05-22 18:11:20,289 DEBUG FileExtractor.Service.SharepointService – [exportDocumentsAndMetadata] Query: <View Scope='RecursiveAll'>  
+                                <Query> 
+                                    <Where><In>
+                    <FieldRef Name='ID'/>
+                    <Values><Value Type='Counter'>17567</Value></Values>
+                    </In></Where>
+                                </Query>  
+                                <ViewFields>
+                                    <FieldRef Name='ID'/>
+                                    <FieldRef Name='IDDoc'/>
+                                    <FieldRef Name='Title'/>
+                                    <FieldRef Name='SAP_PROF_TEXT01'/>
+                                    <FieldRef Name='SAP_PROF_TEXT02'/>
+                                    <FieldRef Name='SAP_PROF_TEXT03'/>
+                                    <FieldRef Name='SAP_PROF_TEXT04'/>
+                                    <FieldRef Name='SAP_PROF_TEXT05'/>
+                                    <FieldRef Name='SAP_PROF_TEXT06'/>
+                                    <FieldRef Name='SAP_PROF_TEXT07'/>
+                                    <FieldRef Name='LOTTO_ARCH'/>
+                                    <FieldRef Name='SAP_PROF_DATE02'/>
+                                    <FieldRef Name='FileRef'/>
+                                    <FieldRef Name='FileLeafRef'/>
+                                    <FieldRef Name='DOCNAME'/>
+                                    <FieldRef Name='ADR_CLIENTE'/>
+                                    <FieldRef Name='Nome'/>
+                                    <FieldRef Name='Cognome'/>
+                                </ViewFields>
+                            </View>
+2017-05-22 18:11:20,720 DEBUG FileExtractor.Service.SharepointService – [exportDocumentsAndMetadata] Items.Count1

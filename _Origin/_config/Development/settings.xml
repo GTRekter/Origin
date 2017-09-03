@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+
+  <ItemsList>
+    <PageDimensions>
+      <Dimension>20</Dimension>
+      <Dimension>30</Dimension>
+      <Dimension>50</Dimension>
+    </PageDimensions>
+
+    <Items>
+      <Item type="dog">
+        <Properties>
+          <Property name="Name" />
+          <Property name="Race" />
+          <Property name="Gender" />
+          <Property name="Roi" />
+          <Property name="Microchip" />
+        </Properties>
+      </Item>
+    </Items>
+    
+  </ItemsList>  
+</Configuration>

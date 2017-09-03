@@ -1,0 +1,1 @@
+2017-05-22 18:32:54,116 ERROR FileExtractor.Service.SharepointService – ExecuteNonQuery: Connection property has not been initialized.

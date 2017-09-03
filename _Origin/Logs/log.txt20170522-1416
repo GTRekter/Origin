@@ -1,0 +1,78 @@
+2017-05-22 14:16:38,333 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Start
+2017-05-22 14:16:38,360 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Company: Company
+2017-05-22 14:16:38,360 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] LastItemId: 0
+2017-05-22 14:16:38,361 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] PageDimension: 10
+2017-05-22 14:16:38,361 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] SortDirection: 
+2017-05-22 14:16:38,361 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] SortName: 
+2017-05-22 14:16:38,361 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: ID,  SharepointName: ID, SharepointType: Counter, Value: 
+2017-05-22 14:16:38,361 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: SAP_PROF_TEXT01,  SharepointName: SAP_PROF_TEXT01, SharepointType: Text, Value: 
+2017-05-22 14:16:38,361 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: DocumentDateFrom,  SharepointName: SAP_PROF_DATE02, SharepointType: DateTime, Value: 
+2017-05-22 14:16:38,361 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: DocumentDateTo,  SharepointName: SAP_PROF_DATE02, SharepointType: DateTime, Value: 
+2017-05-22 14:16:38,362 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: SAP_PROF_TEXT04,  SharepointName: SAP_PROF_TEXT04, SharepointType: Text, Value: 
+2017-05-22 14:16:38,362 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: SAP_PROF_TEXT02,  SharepointName: SAP_PROF_TEXT02, SharepointType: Text, Value: 
+2017-05-22 14:16:38,362 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: SAP_PROF_TEXT03,  SharepointName: SAP_PROF_TEXT03, SharepointType: Text, Value: 
+2017-05-22 14:16:38,362 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: ClientCode,  SharepointName: ADR_CLIENTE, SharepointType: Text, Value: 
+2017-05-22 14:16:38,362 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: SAP_PROF_TEXT05,  SharepointName: SAP_PROF_TEXT05, SharepointType: Text, Value: 2014
+2017-05-22 14:16:38,445 DEBUG FileExtractor.Service.SharepointService – Query: <View Scope='RecursiveAll'>  
+                                <Query> 
+                                    <Where><And><Eq>
+                        <FieldRef Name='SAP_PROF_TEXT05'/>
+                        <Value Type='Text'>2014</Value>
+                    </Eq><And><Eq>
+                        <FieldRef Name='SAP_PROF_TEXT06'/>
+                        <Value Type='Text'>0070</Value>
+                    </Eq><Eq>
+                        <FieldRef Name='FSObjType'/>
+                        <Value Type='Lookup'>0</Value>
+                    </Eq></And></And></Where>
+                                </Query>  
+                                <ViewFields>
+                                    <FieldRef Name='ID'/>
+                                    <FieldRef Name='IDDoc'/>
+                                    <FieldRef Name='Title'/>
+                                    <FieldRef Name='SAP_PROF_TEXT01'/>
+                                    <FieldRef Name='SAP_PROF_TEXT02'/>
+                                    <FieldRef Name='SAP_PROF_TEXT03'/>
+                                    <FieldRef Name='SAP_PROF_TEXT04'/>
+                                    <FieldRef Name='SAP_PROF_TEXT05'/>
+                                    <FieldRef Name='SAP_PROF_TEXT06'/>
+                                    <FieldRef Name='SAP_PROF_TEXT07'/>
+                                    <FieldRef Name='LOTTO_ARCH'/>
+                                    <FieldRef Name='SAP_PROF_DATE02'/>
+                                    <FieldRef Name='FileRef'/>
+                                    <FieldRef Name='FileLeafRef'/>
+                                    <FieldRef Name='DOCNAME'/>
+                                    <FieldRef Name='ADR_CLIENTE'/>
+                                    <FieldRef Name='Nome'/>
+                                    <FieldRef Name='Cognome'/>
+                                </ViewFields><RowLimit>10</RowLimit></View>
+2017-05-22 14:16:39,557 DEBUG FileExtractor.Service.SharepointService – Items.Count: 10
+2017-05-22 14:16:40,202 DEBUG FileExtractor.Service.SharepointService – Items.Count20
+2017-05-22 14:16:40,205 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] End
+2017-05-22 14:16:52,666 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Start
+2017-05-22 14:16:52,666 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Company: Company
+2017-05-22 14:16:52,667 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Email: ivan.porta@docflow.it
+2017-05-22 14:16:52,667 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Type: MetadataAndFiles
+2017-05-22 14:16:52,667 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filename: A
+2017-05-22 14:16:52,667 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: ID,  SharepointName: ID, SharepointType: Counter, Value: 
+2017-05-22 14:16:52,667 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT01,  SharepointName: SAP_PROF_TEXT01, SharepointType: Text, Value: 
+2017-05-22 14:16:52,667 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: DocumentDateFrom,  SharepointName: SAP_PROF_DATE02, SharepointType: DateTime, Value: 
+2017-05-22 14:16:52,667 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: DocumentDateTo,  SharepointName: SAP_PROF_DATE02, SharepointType: DateTime, Value: 
+2017-05-22 14:16:52,667 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT04,  SharepointName: SAP_PROF_TEXT04, SharepointType: Text, Value: 
+2017-05-22 14:16:52,667 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT02,  SharepointName: SAP_PROF_TEXT02, SharepointType: Text, Value: 
+2017-05-22 14:16:52,667 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT03,  SharepointName: SAP_PROF_TEXT03, SharepointType: Text, Value: 
+2017-05-22 14:16:52,667 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: ClientCode,  SharepointName: ADR_CLIENTE, SharepointType: Text, Value: 
+2017-05-22 14:16:52,667 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT05,  SharepointName: SAP_PROF_TEXT05, SharepointType: Text, Value: 2014
+2017-05-22 14:16:53,211 DEBUG FileExtractor.Service.SharepointService – Items.Count20
+2017-05-22 14:16:53,239 DEBUG FileExtractor.Service.SharepointService – [exportAsyncDocumentsAndMetadata] Start
+2017-05-22 14:16:54,012 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 0 from SharePoint with ID: 8885
+2017-05-22 14:16:54,544 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 1 from SharePoint with ID: 8897
+2017-05-22 14:16:55,027 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 2 from SharePoint with ID: 8927
+2017-05-22 14:16:55,537 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 3 from SharePoint with ID: 8929
+2017-05-22 14:16:56,015 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 4 from SharePoint with ID: 9126
+2017-05-22 14:16:56,507 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 5 from SharePoint with ID: 9129
+2017-05-22 14:16:57,008 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 6 from SharePoint with ID: 9283
+2017-05-22 14:16:57,697 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 7 from SharePoint with ID: 9577
+2017-05-22 14:16:58,164 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 8 from SharePoint with ID: 9595
+2017-05-22 14:16:58,694 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 9 from SharePoint with ID: 9710
+2017-05-22 14:16:59,755 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 10 from SharePoint with ID: 9928

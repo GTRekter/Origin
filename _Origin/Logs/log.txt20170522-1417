@@ -1,0 +1,10 @@
+2017-05-22 14:17:00,243 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 11 from SharePoint with ID: 9965
+2017-05-22 14:17:00,724 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 12 from SharePoint with ID: 9979
+2017-05-22 14:17:01,182 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 13 from SharePoint with ID: 9994
+2017-05-22 14:17:01,822 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 14 from SharePoint with ID: 10079
+2017-05-22 14:17:02,325 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 15 from SharePoint with ID: 13187
+2017-05-22 14:17:02,838 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 16 from SharePoint with ID: 14182
+2017-05-22 14:17:03,318 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 17 from SharePoint with ID: 14188
+2017-05-22 14:17:03,887 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 18 from SharePoint with ID: 15053
+2017-05-22 14:17:04,369 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 19 from SharePoint with ID: 15055
+2017-05-22 14:17:05,539 DEBUG FileExtractor.Service.SharepointService – [exportAsyncDocumentsAndMetadata] End

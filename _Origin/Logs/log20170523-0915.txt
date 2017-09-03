@@ -1,0 +1,1 @@
+2017-05-23 09:15:36,532 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start

@@ -1,0 +1,40 @@
+2017-05-31 09:53:01,166 DEBUG FileExtractor.Service.SharepointService – Items.Count80
+2017-05-31 09:53:01,172 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] End
+2017-05-31 09:53:43,076 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
+2017-05-31 09:53:43,076 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] directoryInfo: E:\Development\R_D\FileExtractor\FileExtractor\FileExtractor\Temp
+2017-05-31 09:53:43,077 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] fileNames: 
+2017-05-31 09:53:43,077 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
+2017-05-31 09:53:43,083 DEBUG FileExtractor.Service.SharepointService – [Export] Start
+2017-05-31 09:53:43,084 DEBUG FileExtractor.Service.SharepointService – [Export] DocumentsIds: 8885,8897,8927,8929,9126,9129,9283,9577,9595,9710,9928,9965,9979,9994,10079,13187,15053,15055,15061,15062,15063,15064,15065,15066,15510,16819,16859,16860,16861,16981,16985,17031,17407,17408,17409,17410,17433,17439,17441,17450,17452,17455,17458,17462,17463,17465,17467,17468,17469,17475
+2017-05-31 09:53:43,084 DEBUG FileExtractor.Service.SharepointService – [Export] Type: MetadataAndFiles
+2017-05-31 09:53:43,084 DEBUG FileExtractor.Service.SharepointService – [Export] Filename: test
+2017-05-31 09:53:43,111 DEBUG FileExtractor.Service.SharepointService – [exportDocumentsAndMetadata] Start
+2017-05-31 09:53:43,343 DEBUG FileExtractor.Service.SharepointService – [exportDocumentsAndMetadata] Query: <View Scope='RecursiveAll'>  
+                                <Query> 
+                                    <Where><In>
+                    <FieldRef Name='ID'/>
+                    <Values><Value Type='Counter'>8885</Value><Value Type='Counter'>8897</Value><Value Type='Counter'>8927</Value><Value Type='Counter'>8929</Value><Value Type='Counter'>9126</Value><Value Type='Counter'>9129</Value><Value Type='Counter'>9283</Value><Value Type='Counter'>9577</Value><Value Type='Counter'>9595</Value><Value Type='Counter'>9710</Value><Value Type='Counter'>9928</Value><Value Type='Counter'>9965</Value><Value Type='Counter'>9979</Value><Value Type='Counter'>9994</Value><Value Type='Counter'>10079</Value><Value Type='Counter'>13187</Value><Value Type='Counter'>15053</Value><Value Type='Counter'>15055</Value><Value Type='Counter'>15061</Value><Value Type='Counter'>15062</Value><Value Type='Counter'>15063</Value><Value Type='Counter'>15064</Value><Value Type='Counter'>15065</Value><Value Type='Counter'>15066</Value><Value Type='Counter'>15510</Value><Value Type='Counter'>16819</Value><Value Type='Counter'>16859</Value><Value Type='Counter'>16860</Value><Value Type='Counter'>16861</Value><Value Type='Counter'>16981</Value><Value Type='Counter'>16985</Value><Value Type='Counter'>17031</Value><Value Type='Counter'>17407</Value><Value Type='Counter'>17408</Value><Value Type='Counter'>17409</Value><Value Type='Counter'>17410</Value><Value Type='Counter'>17433</Value><Value Type='Counter'>17439</Value><Value Type='Counter'>17441</Value><Value Type='Counter'>17450</Value><Value Type='Counter'>17452</Value><Value Type='Counter'>17455</Value><Value Type='Counter'>17458</Value><Value Type='Counter'>17462</Value><Value Type='Counter'>17463</Value><Value Type='Counter'>17465</Value><Value Type='Counter'>17467</Value><Value Type='Counter'>17468</Value><Value Type='Counter'>17469</Value><Value Type='Counter'>17475</Value></Values>
+                    </In></Where>
+                                </Query>  
+                                <ViewFields>
+                                    <FieldRef Name='ID'/>
+                                    <FieldRef Name='IDDoc'/>
+                                    <FieldRef Name='Title'/>
+                                    <FieldRef Name='SAP_PROF_TEXT01'/>
+                                    <FieldRef Name='SAP_PROF_TEXT02'/>
+                                    <FieldRef Name='SAP_PROF_TEXT03'/>
+                                    <FieldRef Name='SAP_PROF_TEXT04'/>
+                                    <FieldRef Name='SAP_PROF_TEXT05'/>
+                                    <FieldRef Name='SAP_PROF_TEXT06'/>
+                                    <FieldRef Name='SAP_PROF_TEXT07'/>
+                                    <FieldRef Name='LOTTO_ARCH'/>
+                                    <FieldRef Name='SAP_PROF_DATE02'/>
+                                    <FieldRef Name='FileRef'/>
+                                    <FieldRef Name='FileLeafRef'/>
+                                    <FieldRef Name='DOCNAME'/>
+                                    <FieldRef Name='ADR_CLIENTE'/>
+                                    <FieldRef Name='Nome'/>
+                                    <FieldRef Name='Cognome'/>
+                                </ViewFields>
+                            </View>
+2017-05-31 09:53:45,382 DEBUG FileExtractor.Service.SharepointService – [exportDocumentsAndMetadata] Items.Count50

@@ -1,0 +1,56 @@
+2017-05-22 18:10:58,618 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
+2017-05-22 18:10:58,627 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] directoryInfo: E:\
+2017-05-22 18:10:58,627 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] fileNames: 
+2017-05-22 18:10:58,627 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
+2017-05-22 18:10:58,727 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Start
+2017-05-22 18:10:58,727 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Company: Company
+2017-05-22 18:10:58,727 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] LastItemId: 0
+2017-05-22 18:10:58,727 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] PageDimension: 10
+2017-05-22 18:10:58,729 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] SortDirection: 
+2017-05-22 18:10:58,729 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] SortName: 
+2017-05-22 18:10:58,729 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: ID,  SharepointName: ID, SharepointType: Counter, Value: 
+2017-05-22 18:10:58,729 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: SAP_PROF_TEXT01,  SharepointName: SAP_PROF_TEXT01, SharepointType: Text, Value: 
+2017-05-22 18:10:58,729 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: DocumentDateFrom,  SharepointName: SAP_PROF_DATE02, SharepointType: DateTime, Value: 
+2017-05-22 18:10:58,729 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: DocumentDateTo,  SharepointName: SAP_PROF_DATE02, SharepointType: DateTime, Value: 
+2017-05-22 18:10:58,729 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: SAP_PROF_TEXT04,  SharepointName: SAP_PROF_TEXT04, SharepointType: Text, Value: 
+2017-05-22 18:10:58,729 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: SAP_PROF_TEXT02,  SharepointName: SAP_PROF_TEXT02, SharepointType: Text, Value: 
+2017-05-22 18:10:58,729 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: SAP_PROF_TEXT03,  SharepointName: SAP_PROF_TEXT03, SharepointType: Text, Value: 
+2017-05-22 18:10:58,729 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: ClientCode,  SharepointName: ADR_CLIENTE, SharepointType: Text, Value: 
+2017-05-22 18:10:58,729 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Filter Name: SAP_PROF_TEXT05,  SharepointName: SAP_PROF_TEXT05, SharepointType: Text, Value: 2016
+2017-05-22 18:10:58,760 DEBUG FileExtractor.Service.SharepointService – Query: <View Scope='RecursiveAll'>  
+                                <Query> 
+                                    <Where><And><Eq>
+                        <FieldRef Name='SAP_PROF_TEXT05'/>
+                        <Value Type='Text'>2016</Value>
+                    </Eq><And><Eq>
+                        <FieldRef Name='SAP_PROF_TEXT06'/>
+                        <Value Type='Text'>0070</Value>
+                    </Eq><Eq>
+                        <FieldRef Name='FSObjType'/>
+                        <Value Type='Lookup'>0</Value>
+                    </Eq></And></And></Where>
+                                </Query>  
+                                <ViewFields>
+                                    <FieldRef Name='ID'/>
+                                    <FieldRef Name='IDDoc'/>
+                                    <FieldRef Name='Title'/>
+                                    <FieldRef Name='SAP_PROF_TEXT01'/>
+                                    <FieldRef Name='SAP_PROF_TEXT02'/>
+                                    <FieldRef Name='SAP_PROF_TEXT03'/>
+                                    <FieldRef Name='SAP_PROF_TEXT04'/>
+                                    <FieldRef Name='SAP_PROF_TEXT05'/>
+                                    <FieldRef Name='SAP_PROF_TEXT06'/>
+                                    <FieldRef Name='SAP_PROF_TEXT07'/>
+                                    <FieldRef Name='LOTTO_ARCH'/>
+                                    <FieldRef Name='SAP_PROF_DATE02'/>
+                                    <FieldRef Name='FileRef'/>
+                                    <FieldRef Name='FileLeafRef'/>
+                                    <FieldRef Name='DOCNAME'/>
+                                    <FieldRef Name='ADR_CLIENTE'/>
+                                    <FieldRef Name='Nome'/>
+                                    <FieldRef Name='Cognome'/>
+                                </ViewFields><RowLimit>10</RowLimit></View>
+2017-05-22 18:10:59,351 DEBUG FileExtractor.Service.SharepointService – Items.Count: 10
+2017-05-22 18:10:59,353 ERROR FileExtractor.Service.SharepointService – [GetDocuments] Error: The current item has SAP_PROF_DATE01 setted to null: 17542
+2017-05-22 18:10:59,784 DEBUG FileExtractor.Service.SharepointService – Items.Count15
+2017-05-22 18:10:59,785 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] End

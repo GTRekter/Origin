@@ -1,0 +1,8 @@
+2017-05-23 10:37:01,138 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT01,  SharepointName: SAP_PROF_TEXT01, SharepointType: Text, Value: 
+2017-05-23 10:37:10,188 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: DocumentDateFrom,  SharepointName: SAP_PROF_DATE02, SharepointType: DateTime, Value: 
+2017-05-23 10:37:14,508 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: DocumentDateTo,  SharepointName: SAP_PROF_DATE02, SharepointType: DateTime, Value: 
+2017-05-23 10:37:14,508 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT04,  SharepointName: SAP_PROF_TEXT04, SharepointType: Text, Value: 
+2017-05-23 10:37:14,513 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT02,  SharepointName: SAP_PROF_TEXT02, SharepointType: Text, Value: 
+2017-05-23 10:37:14,513 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT03,  SharepointName: SAP_PROF_TEXT03, SharepointType: Text, Value: 
+2017-05-23 10:37:14,513 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: ClientCode,  SharepointName: ADR_CLIENTE, SharepointType: Text, Value: 
+2017-05-23 10:37:14,513 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Filter Name: SAP_PROF_TEXT05,  SharepointName: SAP_PROF_TEXT05, SharepointType: Text, Value: 2016

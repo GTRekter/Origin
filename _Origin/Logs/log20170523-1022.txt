@@ -1,0 +1,5 @@
+2017-05-23 10:21:54,275 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
+2017-05-23 10:21:54,286 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] directoryInfo: E:\Development\R_D\FileExtractor\FileExtractor\FileExtractor\Temp
+2017-05-23 10:21:54,287 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] fileNames: asdasd.zip, dasd.zip, Db.sdf
+2017-05-23 10:21:54,287 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
+2017-05-23 10:21:54,430 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] Start

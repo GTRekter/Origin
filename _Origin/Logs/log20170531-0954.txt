@@ -1,0 +1,9 @@
+2017-05-31 09:54:08,569 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
+2017-05-31 09:54:08,573 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] directoryInfo: E:\Development\R_D\FileExtractor\FileExtractor\FileExtractor\Temp
+2017-05-31 09:54:08,573 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] fileNames: Db.sdf
+2017-05-31 09:54:08,573 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
+2017-05-31 09:54:08,574 DEBUG FileExtractor.Service.SharepointService – [Export] Start
+2017-05-31 09:54:08,576 DEBUG FileExtractor.Service.SharepointService – [Export] DocumentsIds: 8885,8897,8927,8929,9126,9129,9283,9577,9595,9710,9928,9965,9979,9994,10079,13187,15053,15055,15061,15062,15063,15064,15065,15066,15510,16819,16859,16860,16861,16981,16985,17031,17407,17408,17409,17410,17433,17439,17441,17450,17452,17455,17458,17462,17463,17465,17467,17468,17469,17475
+2017-05-31 09:54:08,579 DEBUG FileExtractor.Service.SharepointService – [Export] Type: MetadataAndFiles
+2017-05-31 09:54:08,579 DEBUG FileExtractor.Service.SharepointService – [Export] Filename: test
+2017-05-31 09:54:19,091 DEBUG FileExtractor.Service.SharepointService – [exportDocumentsAndMetadata] Start

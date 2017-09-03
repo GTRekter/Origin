@@ -1,0 +1,1 @@
+2017-05-22 18:25:57,060 ERROR FileExtractor.Service.SharepointService – Errore in una parte del formato della data. [ Expression (if known) =  ]

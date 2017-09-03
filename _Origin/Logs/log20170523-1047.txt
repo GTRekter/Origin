@@ -1,0 +1,12 @@
+2017-05-23 10:47:01,054 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 14 from SharePoint with ID: 23615
+2017-05-23 10:47:02,638 DEBUG FileExtractor.Service.SharepointService – [exportAsyncDocumentsAndMetadata] End
+2017-05-23 10:47:02,661 ERROR FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Error:The specified string is not in the form required for an e-mail address.   at System.Net.Mail.MailAddressParser.ReadCfwsAndThrowIfIncomplete(String data, Int32 index)
+   at System.Net.Mail.MailAddressParser.ParseDomain(String data, Int32& index)
+   at System.Net.Mail.MailAddressParser.ParseAddress(String data, Boolean expectMultipleAddresses, Int32& index)
+   at System.Net.Mail.MailAddressParser.ParseMultipleAddresses(String data)
+   at System.Net.Mail.MailAddressCollection.ParseValue(String addresses)
+   at System.Net.Mail.MailAddressCollection.Add(String addresses)
+   at System.Net.Mail.Message..ctor(String from, String to)
+   at System.Net.Mail.MailMessage..ctor(String from, String to)
+   at FileExtractor.Service.SharepointService.ExportAsyncDocuments(ExportAsyncDocumentsRequest request) in E:\Development\R_D\FileExtractor\FileExtractor\FileExtractor.Service\Implementation\SharepontService.cs:line 240
+2017-05-23 10:47:02,663 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] End

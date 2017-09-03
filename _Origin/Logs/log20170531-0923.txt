@@ -1,0 +1,4 @@
+2017-05-31 09:23:02,596 DEBUG FileExtractor.Service.SharepointService – Items.Count: 10
+2017-05-31 09:23:02,607 ERROR FileExtractor.Service.SharepointService – [GetDocuments] Error: The current item has SAP_PROF_DATE01 setted to null: 17542
+2017-05-31 09:23:03,883 DEBUG FileExtractor.Service.SharepointService – Items.Count15
+2017-05-31 09:23:03,886 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] End

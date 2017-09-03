@@ -1,0 +1,125 @@
+﻿<div class="row" data-bind="visible: Visibilities.ItemsListVisible">
+    <!-- LIST -->
+    <div class="col-xs-12">
+        <div class="content-header">
+            <h1 data-bind="text: $root.localizedText('Section.ItemsList.Title')"></h1>
+            <p data-bind="text: $root.localizedText('Section.ItemsList.Subtitle')"></p>
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+        <nav class="navbar navbar-default no-background no-margin">
+            <div class="container-fluid">
+
+                <!-- LARGE NAVBAR -->
+                <ul class="nav navbar-nav hidden-xs">
+                    <li>
+                        <a href="#" class="no-padding-v" data-bind="click: onClickToggleMassiveSelection">
+                            <i class="ion-x2 pointer" data-bind="css: MassiveSelectionCss"></i>
+                            <!-- TODO: localizzare il messaggio -->
+                            <span data-bind="text: MassiveSelectionText()"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="no-padding-v" data-bind="click: onClickAddItem">
+                            <i class="ion-x2 pointer ion-ios-plus-outline"></i>
+                            <span data-bind="text: $root.localizedText('Document.List.Header.Button.Add')"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="no-padding-v" data-bind="click: onClickDeleteItem">
+                            <i class="ion-x2 pointer ion-ios-trash-outline"></i>
+                            <span data-bind="text: $root.localizedText('Document.List.Header.Button.Delete')"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="no-padding-v" data-toggle="dropdown">
+                            <i class="ion-x2 pointer ion-more"></i>&nbsp;
+                            <!--<span data-bind="text: $root.ItemsList.PageDimension()"></span>-->
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- ko foreach: { data: $root.ItemsList.PageDimensions, as: 'dimension' } -->
+                            <li><a href="#" data-bind="click: $root.onClickChangePageDimension, text: dimension"></a></li>
+                            <!-- /ko -->
+                        </ul>
+                    </li>
+                </ul>
+                
+                <ul class="nav navbar-nav hidden-xs pull-right" data-element-id="item-per-page-dropdown">
+                    <li>
+                        <a href="#" class="no-padding-v">
+                            @*<span data-bind="text: $root.ItemList.CurrentItems()"></span> /
+                            <span data-bind="text: $root.ItemList.ItemsCount()"></span>*@    
+                        </a>
+                    </li>
+                </ul>
+                <!-- END LARGE NAVBAR -->
+
+                <!-- SMALL NAVBAR -->
+                <div class="row visible-xs">
+                    <ul class="nav navbar-nav row visible-xs ">
+                        <li class="col-xs-6">
+                            <a href="#" class="no-padding-v inline" data-bind="click: onClickToggleMassiveSelection">
+                                <i class="ion-x2 pointer" data-bind="css: MassiveSelectionCss"></i>
+                            </a>
+                            <a href="#" class="no-padding-v inline" data-bind="click: onClickAddItem">
+                                <i class="ion-x2 pointer ion-ios-download-outline"></i>
+                            </a>
+                            <a href="#" class="no-padding-v inline" data-bind="click: onClickDeleteItem">
+                                <i class="ion-x2 pointer ion-ios-trash-outline"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END SMALL NAVBAR -->
+
+            </div>
+        </nav>
+    </div>
+
+    <div class="col-xs-12">
+        <ul class="list-group">
+
+            <li class="list-group-item visible-md visible-lg">
+                <div class="row header">
+                    <div class="col-xs-1">
+                        <span>#</span>
+                    </div>
+                    <!-- ko foreach: ItemsList.Headers -->
+                    <div class="col-xs-1">
+                        <span data-bind="text: DisplayName "></span>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </li>
+
+            <!-- ko foreach: ItemsList.Items -->
+
+            <li class="list-group-item visible-md visible-lg">
+                <div class="row">
+                    <div class="col-xs-1 data-checkbox">
+                        <i class="pointer ion-x1 " aria-hidden="true" data-element-id="checkbox" data-bind="css: IsSelectedCssClass, click: $root.clickItemChangeSelection"></i>
+                    </div>
+                    <!-- ko foreach: Properties -->
+                    <div class="col-xs-1">
+                        <span data-bind="text: DisplayName"></span>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </li>
+
+            <!-- /ko -->
+            <li class="list-group-item" data-bind="visible: $root.IsLoading() == false && $root.IsLoadMoreVisible() == true, click: onClickLoadMore">
+                <div class="row">
+                    <div class="col-xs-12 text-center pointer">
+                        <i class="ion-1x ion-chevron-down"></i>
+                        <span data-bind="text: $root.localizedText('Document.List.Footer.LoadMore')"></span>
+                        <i class="ion-1x ion-chevron-down"></i>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <!-- END LIST -->
+</div>
