@@ -13,6 +13,7 @@ function ViewModel(baseUrl) {
     self.Resources = ko.observable(null);
 
     self.ItemsList = new ItemsListViewModel();
+    self.ItemDetails = new ItemViewModel();
     self.Visibilities = new VisibilitiesViewModel();
     self.Form = new FormViewModel();
     self.localizedText = function (toLocalize) {
@@ -254,6 +255,7 @@ function ViewModel(baseUrl) {
     self.toggleVisibilities = function (sectionToShow) {
         self.Visibilities.DashboardVisible(false);
         self.Visibilities.ItemsListVisible(false);
+        self.Visibilities.ItemDetailsVisible(false);
         self.Visibilities.FormVisible(false);
 
         switch (sectionToShow) {
@@ -262,6 +264,9 @@ function ViewModel(baseUrl) {
                 break;
             case "itemsList":
                 self.Visibilities.ItemsListVisible(true);
+                break;
+            case "itemDetails":
+                self.Visibilities.ItemDetailsVisible(true);
                 break;
             case "form":
                 self.Visibilities.FormVisible(true);
@@ -272,13 +277,8 @@ function ViewModel(baseUrl) {
 
         var items = new Array(self.ItemsList.Items());
         ko.utils.arrayForEach(viewModel.Items, function (item) {
-            var itemToAdd = new ItemViewModel(item);
-            var properties = new Array();
-            ko.utils.arrayForEach(item.Properties, function (property) {
-                var propertyToAdd = new PropertyViewModel(property);
-                properties.push(propertyToAdd);
-            });
-            itemToAdd.Properties = properties;
+            var itemToAdd = new ItemViewModel();
+            itemToAdd.setProperties(item);
             self.ItemsList.Items.push(itemToAdd);
         });
 
@@ -323,6 +323,20 @@ function ViewModel(baseUrl) {
         self.getForm();
         self.toggleVisibilities("form");
     };
+    self.OnClickItem = function (itemData) {
+        var itemDataJS = ko.toJS(itemData)
+        self.ItemDetails.setProperties(itemDataJS);
+        self.toggleVisibilities("itemDetails");
+    };
+    self.onClickEditItem = function () {
+        //self.ItemDetails.OriginId;
+        self.getForm();
+        self.toggleVisibilities("form");
+    };
+    self.onClickDeleteItem = function () {
+        var itemOriginId = self.ItemDetails.OriginId();
+        self.deleteItems(itemOriginId);
+    };
     self.onClickDeleteItems = function () {
 
         // get the selected items
@@ -337,26 +351,10 @@ function ViewModel(baseUrl) {
     };
     self.onClickExecuteForm = function () {
         self.addItem();
-    }
+    };
 
     self.onClickBackButton = function () {
-        if (self.FiltersVisible() === true) {
-            self.toggleVisibilities("companies");
-            self.clearDocuments();
-            self.clearFilters();
-            self.clearCompanies();
-            return false;
-        }
-        if (self.DocumentsVisible() === true) {
-            self.toggleVisibilities("filters");
-            self.clearDocuments();
-            self.clearFilters();
-            return false;
-        }
-        if (self.ExportVisible() === true) {
-            self.toggleVisibilities("documents");
-            return false;
-        }
+        self.toggleVisibilities("itemslist");
     };
     self.onClickLoadMore = function () {
         self.getSharepointDocuments();
@@ -452,6 +450,7 @@ function VisibilitiesViewModel() {
     var self = this;
     self.DashboardVisible = ko.observable(false);
     self.ItemsListVisible = ko.observable(false);
+    self.ItemDetailsVisible = ko.observable(false);
     self.FormVisible = ko.observable(false);
 }
 
@@ -477,17 +476,31 @@ function ItemsListViewModel() {
     self.PageDimensions = ko.observableArray([]);
 }
 
-function ItemViewModel(itemData) {
+function ItemViewModel() {
     var self = this;
-    self.OriginId = itemData.OriginId;
-    self.ItemTypeOriginId = itemData.ItemTypeOriginId;
-    self.CreationDate = itemData.CreationDate;
-    self.LastEditDate = itemData.LastEditDate;
-    self.Properties = ko.observableArray(itemData.Properties);
+    self.OriginId = ko.observable(null);
+    self.ItemTypeOriginId = ko.observable(null);
+    self.CreationDate = ko.observable(null);
+    self.LastEditDate = ko.observable(null);
+    self.Properties = ko.observableArray([]);
     self.IsSelected = ko.observable(false);
     self.IsSelectedCssClass = ko.pureComputed(function () {
         return self.IsSelected() ? "ion-ios-checkmark-outline" : "ion-ios-circle-outline" ;
     }, self);
+
+    self.setProperties = function (itemData) {
+        self.OriginId(itemData.OriginId);
+        self.ItemTypeOriginId(itemData.ItemTypeOriginId);
+        self.CreationDate(itemData.CreationDate);
+        self.LastEditDate(itemData.LastEditDate);
+
+        var properties = new Array();
+        ko.utils.arrayForEach(itemData.Properties, function (property) {
+            var propertyToAdd = new PropertyViewModel(property);
+            properties.push(propertyToAdd);
+        });
+        self.Properties(properties);
+    }
 }
 
 function HeaderViewModel() {

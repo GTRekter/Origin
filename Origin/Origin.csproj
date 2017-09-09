@@ -111,6 +111,7 @@
     <Content Include="Content\Fonts\Quicksand-Medium.ttf" />
     <Content Include="Content\Fonts\Quicksand-Regular.ttf" />
     <Content Include="Content\Scripts\Libs\jquery-1.10.2.min.map" />
+    <Content Include="Views\Shared\_ItemDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
