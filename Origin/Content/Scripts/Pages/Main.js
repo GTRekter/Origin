@@ -9,6 +9,7 @@ function ViewModel(baseUrl) {
 
     self.IsLoadMoreVisible = ko.observable(true);
     self.ErrorDetails = ko.observable("");
+    self.InfoDetails = ko.observable("");
     self.Resources = ko.observable(null);
 
     self.ItemsList = new ItemsListViewModel();
@@ -50,7 +51,8 @@ function ViewModel(baseUrl) {
         },
         Item: {
             AddItem: baseUrl + "Item/AddItem",
-            GetItems: baseUrl + "Item/GetItems"
+            GetItems: baseUrl + "Item/GetItems",
+            DeleteItem: baseUrl + "Item/DeleteItem",
         },
         Form: {
             GetForm: baseUrl + "Form/GetForm"
@@ -212,6 +214,43 @@ function ViewModel(baseUrl) {
 
     };
 
+    self.deleteItems = function (itemsOriginId) {
+
+        self.IsLoading(true);
+
+        var ajaxUrl = self.Urls.Item.DeleteItem,
+            ajaxData = {
+                originIds: itemsOriginId
+            };
+        $.ajax({
+            type: "POST",
+            url: ajaxUrl,
+            data: JSON.stringify(ajaxData),
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function (viewModel) {
+                if (viewModel.ResultInfo.Result === 0) {
+                    // TODO: gestire ok
+                    ko.utils.arrayForEach(itemsOriginId, function (itemOriginId) {
+                        ko.utils.arrayForEach(self.ItemsList.Items(), function (item) {
+                            if (itemOriginId == item.OriginId) {
+                                self.ItemsList.Items.remove(item);
+                            }
+                        });
+                    });
+                } else {
+                    self.IsError(true);
+                    self.ErrorDetails(viewModel.ResultInfo.ErrorMessage);
+                }
+            },
+            complete: function () {
+                self.IsLoading(false);
+            }
+        });
+
+    };
+
     self.toggleVisibilities = function (sectionToShow) {
         self.Visibilities.DashboardVisible(false);
         self.Visibilities.ItemsListVisible(false);
@@ -271,6 +310,7 @@ function ViewModel(baseUrl) {
     };
     self.onClickDogs = function () {
         // TODO: assegnare la tipologia di item ad un observable ed utilizzarlo per filtrare gli item
+        self.ItemsList.Items.removeAll();
         self.getItems();
         self.toggleVisibilities("itemsList");
     };
@@ -283,7 +323,17 @@ function ViewModel(baseUrl) {
         self.getForm();
         self.toggleVisibilities("form");
     };
-    self.onClickDeleteItem = function () {
+    self.onClickDeleteItems = function () {
+
+        // get the selected items
+        var selectedItemsOriginId = new Array();
+        ko.utils.arrayForEach(self.ItemsList.Items(), function (item) {
+            if (true == item.IsSelected()) {
+                selectedItemsOriginId.push(item.OriginId)
+            }
+        });
+
+        self.deleteItems(selectedItemsOriginId);
     };
     self.onClickExecuteForm = function () {
         self.addItem();

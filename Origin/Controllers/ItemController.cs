@@ -22,5 +22,11 @@ namespace Origin.Controllers
             return Json(viewModel, JsonRequestBehavior.DenyGet);
         }
 
+        [HttpPost]
+        public JsonResult DeleteItem(DeleteItemRequest request)
+        {
+            var viewModel = service.DeleteItems(request);
+            return Json(viewModel, JsonRequestBehavior.DenyGet);
+        }
     }
 }

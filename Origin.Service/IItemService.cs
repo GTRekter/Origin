@@ -10,5 +10,7 @@ namespace Origin.Service
 
         GetItemsResponse GetItems(GetItemsRequest request);
 
+        Base DeleteItems(DeleteItemRequest request);
+
     }
 }

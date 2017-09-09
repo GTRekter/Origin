@@ -127,16 +127,6 @@
     <Content Include="Content\Css\bootstrap.css" />
     <Content Include="Content\Css\ionicons.css" />
     <Content Include="Content\Css\Site.css" />
-    <Content Include="Content\Database\Aipadocs.Viewer.exe" />
-    <Content Include="Content\Database\SecureBlackbox.dll" />
-    <Content Include="Content\Database\SecureBlackbox.PKI.dll" />
-    <Content Include="Content\Database\sqlceca40.dll" />
-    <Content Include="Content\Database\sqlcecompact40.dll" />
-    <Content Include="Content\Database\sqlceer40EN.dll" />
-    <Content Include="Content\Database\sqlceme40.dll" />
-    <Content Include="Content\Database\sqlceqp40.dll" />
-    <Content Include="Content\Database\sqlcese40.dll" />
-    <Content Include="Content\Database\System.Data.SqlServerCe.dll" />
     <Content Include="Content\Fonts\ionicons.svg" />
     <Content Include="Content\Fonts\OFL.txt" />
     <Content Include="Content\Scripts\Libs\bootstrap-datepicker.js" />

@@ -79,23 +79,6 @@ namespace Origin.Service
             return viewModel;
         }
 
-        public Base DeleteItem(Item request)
-        {
-            Base viewModel = new Base();
-
-            try
-            {
-
-            }
-            catch (Exception exc)
-            {
-                viewModel.ResultInfo.Result = Base.ResultInfoDto.ResultEnum.Error;
-                viewModel.ResultInfo.ErrorMessage = exc.Message;
-            }
-
-            return viewModel;
-        }
-
         public GetItemsResponse GetItems(GetItemsRequest request)
         {
             GetItemsResponse viewModel = new GetItemsResponse();
@@ -144,13 +127,48 @@ namespace Origin.Service
             return viewModel;
         }
 
-        public GetFormResponse GetForm(GetFormRequest request)
+        public Base DeleteItems(DeleteItemRequest request)
         {
-            GetFormResponse viewModel = new GetFormResponse();
+            Base viewModel = new Base();
 
             try
             {
+                // Check if there are all originIds
+                bool isMissing = false;
+                List<string> originIdsMissing = new List<string>();
+                foreach (string originId in request.OriginIds)
+                {
+                    isMissing = false;
+                    isMissing = !_dataContext.OR_Items
+                                    .Any(i => i.OriginId.Equals(originId));
+                    if(isMissing)
+                    {
+                        originIdsMissing.Add(originId);
+                    }
+                }
 
+                if(originIdsMissing.Count > 0)
+                {
+                    string exceptionMessage = string.Format("The following originIds are missing in the database. Check the data: {0}", string.Join(", ", originIdsMissing.ToArray()));
+                    throw new Exception(exceptionMessage);
+                }
+                
+                foreach (string originId in request.OriginIds)
+                {
+                    // before delete the item, i have to delete all the item properties
+                    List<OR_Property> itemProperties = _dataContext.OR_Properties
+                                                            .Where(p => p.RelatedOriginId.Equals(originId))
+                                                            .ToList();
+                    foreach (OR_Property propertyToDelete in itemProperties) {
+                        _dataContext.OR_Properties.DeleteOnSubmit(propertyToDelete);
+                    }
+
+                    // delete the item
+                    OR_Item itemToDelete = _dataContext.OR_Items.Single(i => i.OriginId.Equals(originId));
+                    _dataContext.OR_Items.DeleteOnSubmit(itemToDelete);
+                }
+                _dataContext.SubmitChanges();
+                
             }
             catch (Exception exc)
             {
@@ -160,6 +178,7 @@ namespace Origin.Service
 
             return viewModel;
         }
+
 
         //private Base AddLookupValue(AddLookupValueRequest lookupValue)
         //{

@@ -63,6 +63,7 @@
     <Compile Include="Models\Elements\Configuration.cs" />
     <Compile Include="Models\Elements\Lookup.cs" />
     <Compile Include="Models\Elements\Property.cs" />
+    <Compile Include="Models\Requests\DeleteItemRequest.cs" />
     <Compile Include="Models\Requests\GetFormRequest.cs" />
     <Compile Include="Models\Requests\AddItemRequest.cs" />
     <Compile Include="Models\Requests\GetItemsRequest.cs" />
