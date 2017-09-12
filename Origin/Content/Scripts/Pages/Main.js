@@ -15,6 +15,7 @@ function ViewModel(baseUrl) {
     self.ItemsList = new ItemsListViewModel();
     self.ItemDetails = new ItemViewModel();
     self.Visibilities = new VisibilitiesViewModel();
+    self.Configurations = new ConfigurationsViewModel();
     self.Form = new FormViewModel();
     self.localizedText = function (toLocalize) {
 
@@ -38,9 +39,9 @@ function ViewModel(baseUrl) {
     });
     self.MassiveSelectionText = ko.computed(function () {
         if (self.IsMassiveSelection() === false) {
-            return self.localizedText('Document.List.Header.Button.Select.All');
+            return self.localizedText('Section.ItemsList.Button.SelectAll');
         }
-        return self.localizedText('Document.List.Header.Button.Deselect.All');
+        return self.localizedText('Section.ItemsList.Button.DeselectAll');
     });
 
     /* =============== PROPERTIESs ============= */
@@ -74,10 +75,10 @@ function ViewModel(baseUrl) {
             dataType: 'json',
             success: function (viewModel) {
 
-                // Aggiungo le configurazioni relative alle possibili dimensioni della pagina
-                if (viewModel.ItemsList.PageDimensions.length > 0) {
-                    self.ItemsList.PageDimensions(viewModel.ItemsList.PageDimensions[0]);
-                }
+                ko.utils.arrayForEach(viewModel.PageDimensions, function (pageDimension) {
+                    var pageDimensionToAdd = new PageDimensionViewModel({ Value: pageDimension });
+                    self.Configurations.PageDimensions.push(pageDimensionToAdd);
+                });
 
             },
             error: function (error) {
@@ -114,9 +115,8 @@ function ViewModel(baseUrl) {
         var ajaxUrl = self.Urls.Item.GetItems,
             ajaxData = {
                 // TODO: Leggere il valore da un observable
-                currentPage: 0,
-                // TODO: Leggere il numero dalla configurazione
-                itemsPerPage: 10,
+                currentPage: self.ItemsList.Page(),
+                itemsPerPage: self.ItemsList.PageDimension(),
                 itemsType: "Dog",
             };
         $.ajax({
@@ -202,7 +202,16 @@ function ViewModel(baseUrl) {
             dataType: 'json',
             success: function (viewModel) {
                 if (viewModel.ResultInfo.Result === 0) {
-                    // TODO: gestire ok
+
+                    // show info message
+                    var localizedText = self.localizedText('Messages.Information.Operation.Complete');
+                    self.InfoDetails(localizedText);
+                    self.IsInfo(true);
+
+                    // refresh the items list
+                    self.ItemsList.Items.removeAll();
+                    self.getItems();
+
                 } else {
                     self.IsError(true);
                     self.ErrorDetails(viewModel.ResultInfo.ErrorMessage);
@@ -232,14 +241,16 @@ function ViewModel(baseUrl) {
             dataType: 'json',
             success: function (viewModel) {
                 if (viewModel.ResultInfo.Result === 0) {
-                    // TODO: gestire ok
-                    ko.utils.arrayForEach(itemsOriginId, function (itemOriginId) {
-                        ko.utils.arrayForEach(self.ItemsList.Items(), function (item) {
-                            if (itemOriginId == item.OriginId) {
-                                self.ItemsList.Items.remove(item);
-                            }
-                        });
-                    });
+
+                    // show info message
+                    var localizedText = self.localizedText('Messages.Information.Operation.Complete');
+                    self.InfoDetails(localizedText);
+                    self.IsInfo(true);
+
+                    // refresh the items list
+                    self.ItemsList.Items.removeAll();
+                    self.getItems();
+
                 } else {
                     self.IsError(true);
                     self.ErrorDetails(viewModel.ResultInfo.ErrorMessage);
@@ -295,6 +306,18 @@ function ViewModel(baseUrl) {
         //self.DocumentsList.CurrentDocuments(self.DocumentsList.Documents().length);
 
     };
+    self.resetItemList = function () {
+
+        // Remove the items
+        self.ItemsList.Items.removeAll();
+
+        // Set the first value of the page dimension as default
+        var pageDimension = 0;
+        if (self.Configurations.PageDimensions().length > 0) {
+            pageDimension = self.Configurations.PageDimensions()[0].Value;
+        }
+        self.ItemsList.PageDimension(pageDimension);
+    }
     self.Init = function () {
 
         self.getConfiguration();
@@ -308,13 +331,9 @@ function ViewModel(baseUrl) {
     self.onClickDashboard = function () {
         self.toggleVisibilities("dashboard");
     };
-    self.onClickDogs = function () {
-        // TODO: assegnare la tipologia di item ad un observable ed utilizzarlo per filtrare gli item
-        self.ItemsList.Items.removeAll();
+    self.onClickItemsList = function () {
+        self.resetItemList();
         self.getItems();
-        self.toggleVisibilities("itemsList");
-    };
-    self.onClickRaces = function () {
         self.toggleVisibilities("itemsList");
     };
 
@@ -336,6 +355,7 @@ function ViewModel(baseUrl) {
     self.onClickDeleteItem = function () {
         var itemOriginId = self.ItemDetails.OriginId();
         self.deleteItems(itemOriginId);
+        self.toggleVisibilities("itemsList");
     };
     self.onClickDeleteItems = function () {
 
@@ -343,14 +363,17 @@ function ViewModel(baseUrl) {
         var selectedItemsOriginId = new Array();
         ko.utils.arrayForEach(self.ItemsList.Items(), function (item) {
             if (true == item.IsSelected()) {
-                selectedItemsOriginId.push(item.OriginId)
+                var itemOriginId = item.OriginId();
+                selectedItemsOriginId.push(itemOriginId)
             }
         });
 
         self.deleteItems(selectedItemsOriginId);
+        self.toggleVisibilities("itemsList");
     };
     self.onClickExecuteForm = function () {
         self.addItem();
+        self.toggleVisibilities("itemsList");
     };
 
     self.onClickBackButton = function () {
@@ -369,17 +392,14 @@ function ViewModel(baseUrl) {
         });
         self.IsMassiveSelection(!self.IsMassiveSelection());
     };
-    self.onClickChangePageDimension = function (itemData) {
-    };
     self.clickItemChangeSelection = function (itemClicked) {
         itemClicked.IsSelected(!itemClicked.IsSelected());   
     };
-    self.onChangeFilterFile = function (itemData, inputName) {
-        if (itemData.value !== "") {
-            self.uploadFilterFile(itemData, inputName);
-        }
-        itemData.value = "";
-    };
+    self.onClickChangePageDimension = function (itemClicked) {
+        self.ItemsList.Items.removeAll();
+        self.ItemsList.PageDimension(itemClicked.Value);
+        self.getItems();
+    }
     /* ======================================= */
 
     self.Init();
@@ -473,7 +493,9 @@ function ItemsListViewModel() {
     var self = this;
     self.Headers = ko.observableArray([]);
     self.Items = ko.observableArray([]);
-    self.PageDimensions = ko.observableArray([]);
+    self.PageDimension = ko.observable();
+    self.ItemType = ko.observable();
+    self.Page = ko.observable(0);
 }
 
 function ItemViewModel() {
@@ -515,6 +537,18 @@ function PropertyViewModel(itemData) {
     self.Name = itemData.Name;
     self.Value = itemData.Value;
 }
+
+function PageDimensionViewModel(itemData) {
+    var self = this;
+    self.Value = itemData.Value;
+    self.IsSelected = ko.observable(false);
+}
+
+function ConfigurationsViewModel() {
+    var self = this;
+    self.PageDimensions = ko.observableArray([]);
+}
+
 /* ======================================= */
 
 /* ================ EVENTs =============== */

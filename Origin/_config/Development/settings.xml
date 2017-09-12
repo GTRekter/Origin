@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configuration>
 
-  <ItemsList>
-    <PageDimensions>
-      <Dimension>20</Dimension>
-      <Dimension>30</Dimension>
-      <Dimension>50</Dimension>
-    </PageDimensions>
+  <PageDimensions>
+    <Dimension>20</Dimension>
+    <Dimension>30</Dimension>
+    <Dimension>50</Dimension>
+  </PageDimensions>
+  
+  <!--
+  1. the user is allowed to see only the list which are presents into the config
+  2. 
+  -->
 
-    <Items>
-      <Item type="dog">
-        <Properties>
-          <Property name="Name" />
-          <Property name="Race" />
-          <Property name="Gender" />
-          <Property name="Roi" />
-          <Property name="Microchip" />
-        </Properties>
-      </Item>
-    </Items>
-    
-  </ItemsList>  
+  <ItemLists>
+    <ItemList>
+      <Type>Dog</Type>
+    </ItemList> 
+    <ItemList>
+      <Type>Cat</Type>
+    </ItemList>
+  </ItemLists>  
+  
 </Configuration>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <!-- NAVBAR -->
+  <resource key="Navbar.Project.Name" value="Origin CMS" />
+  
+  <!-- SIDEBAR -->
+  <resource key="Sidebar.Links.Dashboard" value="Dashboard" />
+  <resource key="Sidebar.Links.ItemsList" value="Items List" />
+  <resource key="Sidebar.Links.Back" value="Back" />
+
+  <!-- DASHBOARD -->
+  <resource key="Section.Dashboard.Title" value="Dashboard" />
+  <resource key="Section.Dashboard.Subtitle" value="WORK IN PROGRESS" />
+
+  <!-- ITEMSLIST -->
+  <resource key="Section.ItemsList.Title" value="Items List" />
+  <resource key="Section.ItemsList.Subtitle" value="List of all the items you have in your store" />
+  <resource key="Section.ItemsList.Button.Add" value="Add" />
+  <resource key="Section.ItemsList.Button.Delete" value="Delete" />
+  <resource key="Section.ItemsList.Button.SelectAll" value="Select All" />
+  <resource key="Section.ItemsList.Button.DeselectAll" value="Deselect All" />
+  <resource key="Section.ItemsList.Button.LoadMore" value="Load More" />
+  
+</resources>

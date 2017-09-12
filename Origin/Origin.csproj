@@ -149,12 +149,11 @@
     <Content Include="Content\Scripts\Libs\respond.min.js" />
     <Content Include="Content\Scripts\Pages\Main.js" />
     <Content Include="Global.asax" />
-    <Content Include="Resources\it-IT.xml" />
+    <Content Include="Resources\en-US.xml" />
     <Content Include="Web.config" />
     <Content Include="_config\Development\settings.xml" />
     <Content Include="Views\Error\_InvalidExport.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Dashboard.cshtml" />
     <Content Include="Views\Shared\_Form.cshtml" />
     <Content Include="Views\Shared\_ItemsList.cshtml" />
