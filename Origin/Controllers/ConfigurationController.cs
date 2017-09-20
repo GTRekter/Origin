@@ -9,18 +9,18 @@ namespace Origin.Controllers
         ILocalizationService service = new LocalizationService();
         ICacheService cacheService = new CacheService();
 
-        [HttpPost]
+        [HttpGet]
         public JsonResult GetLocalizations()
         {
             var viewModel = cacheService.GetLocalizations();
-            return Json(viewModel, JsonRequestBehavior.DenyGet);
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
+        [HttpGet]
         public JsonResult GetConfiguration()
         {
             var viewModel = cacheService.GetConfiguration();
-            return Json(viewModel, JsonRequestBehavior.DenyGet);
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
     }
 }

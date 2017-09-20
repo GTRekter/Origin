@@ -8,6 +8,8 @@ namespace Origin.Service
     {
         Base AddItem(AddItemRequest request);
 
+        GetItemResponse GetItem(GetItemRequest request);
+
         GetItemsResponse GetItems(GetItemsRequest request);
 
         Base DeleteItems(DeleteItemRequest request);

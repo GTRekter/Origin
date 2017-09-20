@@ -1,21 +1,29 @@
 ﻿using System;
 using System.Linq;
+using System.Configuration;
+using System.Collections.Generic;
 using Origin.Service.Models;
 using Origin.Service.Implementation;
 using Origin.Service.Models.Elements;
 using Origin.Service.Models.Requests;
 using Origin.Service.Models.Responses;
-using System.Collections.Generic;
 
 namespace Origin.Service
 {
     public class ItemService : IItemService
     {
+
         #region Private
 
-        CacheService cacheService = new CacheService();
+        private CacheService cacheService = new CacheService();
+
+        private ConfigurationService configurationService = new ConfigurationService();
 
         private OriginDataContext _dataContext;
+
+        private Configuration _configuration;
+
+        private string _localizationErrorKey;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(ItemService));
 
@@ -26,6 +34,8 @@ namespace Origin.Service
         public ItemService()
         {
             _dataContext = new OriginDataContext();
+            _configuration = configurationService.GetConfiguration();
+            _localizationErrorKey = ConfigurationManager.AppSettings["LocalizzazionErrorKey"];
         }
 
         #endregion
@@ -39,7 +49,7 @@ namespace Origin.Service
             try
             {
                 // Prendo l'originId del tipo di item
-                OR_ItemType itemType = GetItemType(request.ItemType);
+                OR_ItemType itemType = getItemType(request.ItemType);
 
                 // Creo l'item
                 string itemOriginId = Guid.NewGuid().ToString();
@@ -85,38 +95,98 @@ namespace Origin.Service
 
             try
             {
-                // Prendo l'originId del tipo di item
-                OR_ItemType itemType = GetItemType(request.ItemsType);
-
                 var viewedItems = request.CurrentPage * request.ItemsPerPage;
+
+                // If the list isn't configurated in the settings, the application will not show it
+                if (!_configuration.ItemLists.ItemLists.Any(il => il.ItemTypeOriginId.Equals(request.ItemTypeOriginId))) {
+                    throw new Exception(string.Format("{1}{2}", _localizationErrorKey, "ListNotConfigurated"));
+                }
+
+                viewModel.Headers = _configuration.ItemLists.ItemLists
+                                        .Single(il => il.ItemTypeOriginId.Equals(request.ItemTypeOriginId))
+                                        .VisibleFields.Select(vf => new GetItemsResponse.Header() {
+                                            Name = vf.Name
+                                        })
+                                        .OrderBy(vf => vf.Name)
+                                        .ToList();
 
                 viewModel.Items = _dataContext.OR_Items
                                     .OrderByDescending(i => i.CreationDate)
                                     .Skip(viewedItems).Take(request.ItemsPerPage)
-                                    .Where(i => i.ItemTypeOriginId.Equals(itemType.OriginId))
+                                    .Where(i => i.ItemTypeOriginId.Equals(request.ItemTypeOriginId))
                                     .Select(i => new GetItemsResponse.Item() {
                                         Id = i.Id,
                                         OriginId = i.OriginId,
                                         ItemTypeOriginId = i.ItemTypeOriginId,
-                                        // TODO: Aggiungere formato della data in configurazione
-                                        CreationDate = "",
-                                        //CreationDate = i.CreationDate.ToString("YYYY"),
-                                        LastEditDate = "",
-                                        //LastEditDate = i.LastEditDate.ToString("YYYY"),
+                                        //CreationDate = i.CreationDate.ToString(_configuration.Date.Format),
+                                        //LastEditDate = i.LastEditDate.ToString(_configuration.Date.Format),
                                         Properties = _dataContext.OR_Properties
-                                            .Where(p => p.RelatedOriginId == i.OriginId)
-                                            .Select(p => new GetItemsResponse.Property() {
-                                                Id = p.Id,
-                                                OriginId = p.OriginId,
-                                                Name = p.Name,
-                                                // TODO: inserire localizzazione nel file delle risorse,
-                                                // in poche parole andra a cercare una chiave che corrisponde al nome della proprietà
-                                                DisplayName = "",
-                                                Value = p.Value
-                                            })
-                                            .ToList()
+                                                        .Where(p => p.RelatedOriginId == i.OriginId)
+                                                        .Where(p => _configuration.ItemLists.ItemLists
+                                                                        .Single(il => il.ItemTypeOriginId.Equals(request.ItemTypeOriginId))
+                                                                        .VisibleFields.Select(vf => vf.Name).ToList()
+                                                                        .Contains(p.Name))
+                                                        .Select(p => new GetItemsResponse.Property()
+                                                        {
+                                                            Id = p.Id,
+                                                            OriginId = p.OriginId,
+                                                            Name = p.Name,
+                                                            Value = p.Value
+                                                        })
+                                                        .OrderBy(p => p.Name)
+                                                        .ToList()                                                   
                                     })
                                     .ToList();
+            }
+            catch (Exception exc)
+            {
+                viewModel.ResultInfo.Result = Base.ResultInfoDto.ResultEnum.Error;
+                viewModel.ResultInfo.ErrorMessage = exc.Message;
+            }
+
+            return viewModel;
+        }
+
+        public GetItemResponse GetItem(GetItemRequest request)
+        {
+            GetItemResponse viewModel = new GetItemResponse();
+
+            try
+            {
+                // If the list isn't configurated in the settings, the application will not show it
+                if (!_configuration.ItemDetails.Any(il => il.ItemTypeOriginId.Equals(request.ItemTypeOriginId)))
+                {
+                    throw new Exception(string.Format("{1}{2}", _localizationErrorKey, "DetailNotConfigurated"));
+                }
+
+                viewModel.Item = _dataContext.OR_Items
+                                    .Where(i => i.OriginId.Equals(request.OriginId))
+                                    .Where(i => i.ItemTypeOriginId.Equals(request.ItemTypeOriginId))
+                                    .Select(i => new GetItemResponse.ItemDetails()
+                                    {
+                                        Id = i.Id,
+                                        OriginId = i.OriginId,
+                                        ItemTypeOriginId = i.ItemTypeOriginId,
+                                        //CreationDate = i.CreationDate.ToString(_configuration.Date.Format),
+                                        //LastEditDate = i.LastEditDate.ToString(_configuration.Date.Format),
+                                        Properties = _dataContext.OR_Properties
+                                                        .Where(p => p.RelatedOriginId == i.OriginId)
+                                                        .Where(p => _configuration.ItemDetails
+                                                                        .Single(il => il.ItemTypeOriginId.Equals(request.ItemTypeOriginId))
+                                                                        .VisibleFields.Select(vf => vf.Name)
+                                                                        .ToList()
+                                                                        .Contains(p.Name))
+                                                        .Select(p => new GetItemResponse.Property()
+                                                        {
+                                                            Id = p.Id,
+                                                            OriginId = p.OriginId,
+                                                            Name = p.Name,
+                                                            Value = p.Value
+                                                        })
+                                                        .OrderBy(p => p.Name)
+                                                        .ToList()
+                                    })
+                                    .FirstOrDefault();
             }
             catch (Exception exc)
             {
@@ -179,7 +249,6 @@ namespace Origin.Service
             return viewModel;
         }
 
-
         //private Base AddLookupValue(AddLookupValueRequest lookupValue)
         //{
         //    Base viewModel = new Base();
@@ -218,14 +287,14 @@ namespace Origin.Service
 
         #region Private Methods
 
-        private GetLookupResponse GetLookup(string name)
+        private GetLookupResponse getLookup(string name)
         {
             GetLookupResponse viewModel = new GetLookupResponse();
 
             return viewModel;
         }
 
-        private OR_ItemType GetItemType(string name)
+        private OR_ItemType getItemType(string name)
         {
             OR_ItemType itemType = _dataContext.OR_ItemTypes
                                     .Where(it => it.Name.Equals(name))

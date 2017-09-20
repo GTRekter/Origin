@@ -66,8 +66,10 @@
     <Compile Include="Models\Requests\DeleteItemRequest.cs" />
     <Compile Include="Models\Requests\GetFormRequest.cs" />
     <Compile Include="Models\Requests\AddItemRequest.cs" />
+    <Compile Include="Models\Requests\GetItemRequest.cs" />
     <Compile Include="Models\Requests\GetItemsRequest.cs" />
     <Compile Include="Models\Responses\GetFormResponse.cs" />
+    <Compile Include="Models\Responses\GetItemResponse.cs" />
     <Compile Include="Models\Responses\GetItemsResponse.cs" />
     <Compile Include="Models\Responses\GetLookupResponse.cs" />
     <Compile Include="Origin.designer.cs">

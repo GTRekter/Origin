@@ -4,8 +4,14 @@ namespace Origin.Service.Models.Responses
 {
     public class GetItemsResponse : Base
     {
-        
+        public List<Header> Headers { get; set; }
+
         public List<Item> Items { get; set; }
+
+        public class Header
+        {
+            public string Name { get; set; }
+        }
 
         public class Item
         {
@@ -30,8 +36,6 @@ namespace Origin.Service.Models.Responses
             public string OriginId { get; set; }
 
             public string Name { get; set; }
-
-            public string DisplayName { get; set; }
 
             public string Value { get; set; }
         }

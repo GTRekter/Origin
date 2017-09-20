@@ -15,13 +15,13 @@
                     <div class="col-xs-12 col-md-6">
                         <!-- ko if: Type() == "Text" -->
                         <div class="form-group">
-                            <label data-bind="text: DisplayName"></label>
+                            <label data-bind="text: LocalizedName"></label>
                             <input type="text" class="form-control" data-bind="attr: {name: Name}, value: Value" >
                         </div>
                         <!-- /ko -->
                         <!-- ko if: Type() == "Lookup" -->
                         <div class="form-group">
-                            <label data-bind="text: DisplayName"></label>
+                            <label data-bind="text: LocalizedName"></label>
                             <select class="form-control" data-bind="attr: {name: Name}, options: Values, value: Value">
                             </select>
                         </div>

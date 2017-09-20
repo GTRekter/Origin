@@ -56,6 +56,17 @@
                             <!-- /ko -->
                         </ul>
                     </li>
+                    <li>
+                        <a href="#" class="no-padding-v" data-toggle="dropdown">
+                            <i class="ion-x2 pointer ion-ios-arrow-down"></i>&nbsp;
+                            <span data-bind="text: ItemsList.ItemTypeOriginId()"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- ko foreach: Configurations.ItemTypesOriginId -->
+                            <li><a href="#" data-bind="click: $root.onClickChangeItemTypeOriginId, text: Value"></a></li>
+                            <!-- /ko -->
+                        </ul>
+                    </li>
                 </ul>
                 <!-- END LARGE NAVBAR -->
 
@@ -91,7 +102,7 @@
                     </div>
                     <!-- ko foreach: ItemsList.Headers -->
                     <div class="col-xs-1">
-                        <span data-bind="text: DisplayName "></span>
+                        <span data-bind="text: LocalizedName() "></span>
                     </div>
                     <!-- /ko -->
                 </div>
@@ -116,7 +127,7 @@
             </li>
 
             <!-- /ko -->
-            <li class="list-group-item" data-bind="visible: $root.IsLoading() == false && $root.IsLoadMoreVisible() == true, click: onClickLoadMore">
+            <li class="list-group-item">
                 <div class="row">
                     <div class="col-xs-12 text-center pointer">
                         <i class="ion-1x ion-chevron-down"></i>

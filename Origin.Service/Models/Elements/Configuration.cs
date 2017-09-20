@@ -6,20 +6,71 @@ using System;
 [XmlRoot("Configuration")]
 public class Configuration
 {
-    [XmlArray("PageDimensions")] 
+    [XmlElement(ElementName = "Date")]
+    public Date Date { get; set; }
+
+    [XmlElement(ElementName = "ItemLists")]
+    public ItemListsConfiguration ItemLists { get; set; }
+
+    [XmlArray("ItemDetails")]
+    [XmlArrayItem("ItemDetail", typeof(ItemDetails))]
+    public List<ItemDetails> ItemDetails { get; set; }
+}
+
+[Serializable()]
+public class Date
+{
+    [XmlAttribute(AttributeName = "Format")]
+    public string Format { get; set; }
+
+}
+
+
+[Serializable()]
+public class ItemListsConfiguration
+{
+    [XmlAttribute(AttributeName = "DefaultItemTypeOriginId")]
+    public string DefaultItemTypeOriginId { get; set; }
+
+    [XmlArray("PageDimensions")]
     [XmlArrayItem("Dimension", typeof(string))]
     public string[] PageDimensions { get; set; }
 
     [XmlArray("ItemLists")]
-    [XmlArrayItem("ItemList", typeof(string))]
-    public string[] ItemLists { get; set; }
+    [XmlArrayItem("ItemList", typeof(ItemList))]
+    public List<ItemList> ItemLists { get; set; }
 }
 
 [Serializable()]
-public class ItemLists
+public class ItemList
 {
+    [XmlAttribute(AttributeName = "ItemTypeOriginId")]
+    public string ItemTypeOriginId { get; set; }
 
+    [XmlArray("VisibleFields")]
+    [XmlArrayItem("VisibleField", typeof(VisibleField))]
+    public List<VisibleField> VisibleFields { get; set; }
 
+}
+
+[Serializable()]
+public class ItemDetails
+{
+    [XmlAttribute(AttributeName = "ItemTypeOriginId")]
+    public string ItemTypeOriginId { get; set; }
+
+    [XmlArray("VisibleFields")]
+    [XmlArrayItem("VisibleField", typeof(VisibleField))]
+    public List<VisibleField> VisibleFields { get; set; }
+
+}
+
+[Serializable()]
+public class VisibleField
+{
+    [XmlAttribute(AttributeName = "Name")]
+    public string Name { get; set; }
+    
 }
 
 

@@ -16,8 +16,6 @@ namespace Origin.Service.Models.Responses
 
             public string Name { get; set; }
 
-            public string DisplayName { get; set; }
-
             public string Required { get; set; }
 
             public string Type { get; set; }

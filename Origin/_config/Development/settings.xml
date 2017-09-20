@@ -1,24 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configuration>
-
-  <PageDimensions>
-    <Dimension>20</Dimension>
-    <Dimension>30</Dimension>
-    <Dimension>50</Dimension>
-  </PageDimensions>
   
-  <!--
-  1. the user is allowed to see only the list which are presents into the config
-  2. 
-  -->
+  <Date Format="YYYY-MM-DD" />
+  
+  <ItemLists DefaultItemTypeOriginId="657fb42a-1914-481c-b41b-8743ea97a3a3">
 
-  <ItemLists>
-    <ItemList>
-      <Type>Dog</Type>
-    </ItemList> 
-    <ItemList>
-      <Type>Cat</Type>
-    </ItemList>
-  </ItemLists>  
+    <PageDimensions>
+      <Dimension>20</Dimension>
+    </PageDimensions>
+
+    <ItemLists>
+      <ItemList ItemTypeOriginId="657fb42a-1914-481c-b41b-8743ea97a3a3">
+        <VisibleFields>
+          <VisibleField Name="Name" />
+          <VisibleField Name="Gender" />
+        </VisibleFields>
+      </ItemList>
+      <!--<Actions>
+        <Action OriginId="83596701-e818-4600-89be-c5770d53a28e" />
+      </Actions>-->
+    </ItemLists>
+    
+  </ItemLists>
+
+  <ItemDetails>
+    <ItemDetail ItemTypeOriginId="657fb42a-1914-481c-b41b-8743ea97a3a3">
+      <VisibleFields>
+        <VisibleField Name="Name" />
+        <VisibleField Name="Gender" />
+      </VisibleFields>
+    </ItemDetail>
+  </ItemDetails>
   
 </Configuration>

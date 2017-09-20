@@ -7,6 +7,6 @@
 
         public int ItemsPerPage { get; set; }
 
-        public string ItemsType { get; set; }
+        public string ItemTypeOriginId { get; set; }
     }
 }

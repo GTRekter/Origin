@@ -3,20 +3,41 @@ function ViewModel(baseUrl) {
 
     var self = this;
 
-    self.IsInfo = ko.observable(false);
-    self.IsError = ko.observable(false);
-    self.IsLoading = ko.observable(false);
+    /* =============== VARIABLEs ============= */
+    self.BaseUrl = baseUrl;
+    self.Urls = {
+        General: {
+            GetConfiguration: self.BaseUrl + "Configuration/GetConfiguration",
+            GetLocalizations: self.BaseUrl + "Configuration/GetLocalizations"
+        },
+        Item: {
+            AddItem: self.BaseUrl + "Item/AddItem",
+            GetItems: self.BaseUrl + "Item/GetItems",
+            GetItem: self.BaseUrl + "Item/GetItem",
+            DeleteItem: self.BaseUrl + "Item/DeleteItem",
+        },
+        Form: {
+            GetForm: self.BaseUrl + "Form/GetForm"
+        }
+    };
 
-    self.IsLoadMoreVisible = ko.observable(true);
-    self.ErrorDetails = ko.observable("");
-    self.InfoDetails = ko.observable("");
-    self.Resources = ko.observable(null);
-
+    /* =============== OBSERVABLEs ============= */
+    /* =============== 1. GENERAL ============= */
+    self.Form = new FormViewModel();
     self.ItemsList = new ItemsListViewModel();
     self.ItemDetails = new ItemViewModel();
     self.Visibilities = new VisibilitiesViewModel();
     self.Configurations = new ConfigurationsViewModel();
-    self.Form = new FormViewModel();
+
+    /* =============== 2. MESSAGEs ============= */
+    self.IsInfo = ko.observable(false);
+    self.IsError = ko.observable(false);
+    self.IsLoading = ko.observable(false);
+    self.ErrorDetails = ko.observable("");
+    self.InfoDetails = ko.observable("");
+
+    /* =============== 3. LOCALIZATIONs ============= */
+    self.Resources = ko.observable(null);
     self.localizedText = function (toLocalize) {
 
         return ko.computed(function () {
@@ -30,6 +51,7 @@ function ViewModel(baseUrl) {
 
     };
 
+    /* =============== 4. ELECTION ============= */
     self.IsMassiveSelection = ko.observable(false);
     self.MassiveSelectionCss = ko.computed(function () {
         if (self.IsMassiveSelection() === false) {
@@ -44,42 +66,34 @@ function ViewModel(baseUrl) {
         return self.localizedText('Section.ItemsList.Button.DeselectAll');
     });
 
-    /* =============== PROPERTIESs ============= */
-    self.BackButtonVisible = ko.observable(false);
-    self.Urls = {
-        General: {
-            GetConfiguration: baseUrl + "Configuration/GetConfiguration",
-            GetLocalizations: baseUrl + "Configuration/GetLocalizations"
-        },
-        Item: {
-            AddItem: baseUrl + "Item/AddItem",
-            GetItems: baseUrl + "Item/GetItems",
-            DeleteItem: baseUrl + "Item/DeleteItem",
-        },
-        Form: {
-            GetForm: baseUrl + "Form/GetForm"
-        }
-    };
-    /* ======================================== */
-
     /* =============== FUNCTIONs ============== */
+    /* =============== 1. GET ============= */
     self.getConfiguration = function () {
 
         var ajaxUrl = self.Urls.General.GetConfiguration;
 
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: ajaxUrl,
             cache: false,
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             success: function (viewModel) {
 
-                ko.utils.arrayForEach(viewModel.PageDimensions, function (pageDimension) {
+                // page dimension has to be observable because the UI will change
+                ko.utils.arrayForEach(viewModel.ItemLists.PageDimensions, function (pageDimension) {
                     var pageDimensionToAdd = new PageDimensionViewModel({ Value: pageDimension });
                     self.Configurations.PageDimensions.push(pageDimensionToAdd);
                 });
 
+                // set the DefaultItemTypeOriginId
+                self.Configurations.DefaultItemTypeOriginId = viewModel.ItemLists.DefaultItemTypeOriginId;
+
+                // item types has to be observable because the UI will change
+                ko.utils.arrayForEach(viewModel.ItemLists.ItemLists, function (itemList) {
+                    var itemTypesOriginIdToAdd = new ItemTypeOriginIdViewModel({ Value: itemList.ItemTypeOriginId });
+                    self.Configurations.ItemTypesOriginId.push(itemTypesOriginIdToAdd);
+                });
             },
             error: function (error) {
                 self.IsError(true);
@@ -93,7 +107,7 @@ function ViewModel(baseUrl) {
         var ajaxUrl = self.Urls.General.GetLocalizations;
 
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: ajaxUrl,
             cache: false,
             contentType: "application/json; charset=utf-8",
@@ -117,7 +131,7 @@ function ViewModel(baseUrl) {
                 // TODO: Leggere il valore da un observable
                 currentPage: self.ItemsList.Page(),
                 itemsPerPage: self.ItemsList.PageDimension(),
-                itemsType: "Dog",
+                ItemTypeOriginId: self.ItemsList.ItemTypeOriginId(),
             };
         $.ajax({
             type: "POST",
@@ -128,10 +142,20 @@ function ViewModel(baseUrl) {
             dataType: 'json',
             success: function (viewModel) {
                 if (viewModel.ResultInfo.Result === 0) {
+
+                    // set itemsList headers
+                    self.ItemsList.Headers.removeAll();
+                    ko.utils.arrayForEach(viewModel.Headers, function (header) {
+                        var headerToAdd = new HeaderViewModel();
+                        header.LocalizedName = self.localizedText("Section.ItemsList.Property." + header.Name);
+                        headerToAdd.setProperties(header);
+                        self.ItemsList.Headers.push(headerToAdd);
+                    });
+ 
                     self.addItemsToItemsList(viewModel);
                 } else {
                     self.IsError(true);
-                    self.ErrorDetails(viewModel.ResultInfo.ErrorMessage);
+                    //self.ErrorDetails = self.localizedText(viewModel.ResultInfo.ErrorMessage);
                 }
             },
             complete: function () {
@@ -140,6 +164,36 @@ function ViewModel(baseUrl) {
         });
 
     };
+    self.getItem = function () {
+
+        self.IsLoading(true);
+
+        var ajaxUrl = self.Urls.Item.GetItem,
+            ajaxData = {
+                OriginId: self.ItemDetails.OriginId(),
+                ItemTypeOriginId: self.ItemDetails.ItemTypeOriginId()
+            };
+        $.ajax({
+            type: "POST",
+            url: ajaxUrl,
+            data: JSON.stringify(ajaxData),
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function (viewModel) {
+                if (viewModel.ResultInfo.Result === 0) {
+                    self.ItemDetails.setProperties(viewModel.Item);
+                } else {
+                    self.IsError(true);
+                    self.ErrorDetails = self.localizedText(viewModel.ResultInfo.ErrorMessage);
+                }
+            },
+            complete: function () {
+                self.IsLoading(false);
+            }
+        });
+
+    }; 
     self.getForm = function () {
 
         self.IsLoading(true);
@@ -161,9 +215,8 @@ function ViewModel(baseUrl) {
             success: function (viewModel) {
                 if (viewModel.ResultInfo.Result === 0) {
 
-                    // pulisco gli imput pregressi
+                    // clean old inputs
                     self.Form.Inputs.removeAll();
-
                     self.Form.Name(viewModel.Name);
 
                     ko.utils.arrayForEach(viewModel.Inputs, function (input) {
@@ -181,8 +234,9 @@ function ViewModel(baseUrl) {
             }
         });
 
-    };
+    }; // to adjust 
 
+    /* =============== 2. ADD ============= */
     self.addItem = function () {
 
         self.IsLoading(true);
@@ -223,7 +277,30 @@ function ViewModel(baseUrl) {
         });
 
     };
+    self.addItemsToItemsList = function (viewModel) {
 
+        var items = new Array(self.ItemsList.Items());
+        ko.utils.arrayForEach(viewModel.Items, function (item) {
+            var itemToAdd = new ItemViewModel();
+            itemToAdd.setProperties(item);
+            self.ItemsList.Items.push(itemToAdd);
+        });
+
+        //Set the total item counts 
+        //self.ItemsList.ItemsCount(listData.ItemsCount);
+
+        //Hide the load more if the items count is the same as the document loaded
+        //self.IsLoadMoreVisible(true);
+        //if (listData.ItemsCount === self.DocumentsList.Documents().length) {
+        //    self.IsLoadMoreVisible(false);
+        //}
+
+        //self.DocumentsList.CurrentPageIndex(self.DocumentsList.CurrentPageIndex() + 1);
+        //self.DocumentsList.CurrentDocuments(self.DocumentsList.Documents().length);
+
+    }; // to adjust
+
+    /* =============== 3. DELETE ============= */
     self.deleteItems = function (itemsOriginId) {
 
         self.IsLoading(true);
@@ -263,6 +340,7 @@ function ViewModel(baseUrl) {
 
     };
 
+    /* =============== 4. GENERAL ============= */
     self.toggleVisibilities = function (sectionToShow) {
         self.Visibilities.DashboardVisible(false);
         self.Visibilities.ItemsListVisible(false);
@@ -284,28 +362,6 @@ function ViewModel(baseUrl) {
                 break;
         }
     };
-    self.addItemsToItemsList = function (viewModel) {
-
-        var items = new Array(self.ItemsList.Items());
-        ko.utils.arrayForEach(viewModel.Items, function (item) {
-            var itemToAdd = new ItemViewModel();
-            itemToAdd.setProperties(item);
-            self.ItemsList.Items.push(itemToAdd);
-        });
-
-        //Set the total item counts 
-        //self.ItemsList.ItemsCount(listData.ItemsCount);
-
-        //Hide the load more if the items count is the same as the document loaded
-        //self.IsLoadMoreVisible(true);
-        //if (listData.ItemsCount === self.DocumentsList.Documents().length) {
-        //    self.IsLoadMoreVisible(false);
-        //}
-
-        //self.DocumentsList.CurrentPageIndex(self.DocumentsList.CurrentPageIndex() + 1);
-        //self.DocumentsList.CurrentDocuments(self.DocumentsList.Documents().length);
-
-    };
     self.resetItemList = function () {
 
         // Remove the items
@@ -317,6 +373,9 @@ function ViewModel(baseUrl) {
             pageDimension = self.Configurations.PageDimensions()[0].Value;
         }
         self.ItemsList.PageDimension(pageDimension);
+
+        // Set the filter of the listType as the configuration
+        self.ItemsList.ItemTypeOriginId(self.Configurations.DefaultItemTypeOriginId);
     }
     self.Init = function () {
 
@@ -325,9 +384,9 @@ function ViewModel(baseUrl) {
 
         self.toggleVisibilities("dashboard");
     };
-    /* ======================================== */
 
     /* ================ EVENTs =============== */
+    /* =============== 1. NAVBAR ============= */
     self.onClickDashboard = function () {
         self.toggleVisibilities("dashboard");
     };
@@ -337,27 +396,21 @@ function ViewModel(baseUrl) {
         self.toggleVisibilities("itemsList");
     };
 
+    /* =============== 2. ITEMsLIST ============= */
     self.onClickAddItem = function () {
+        self.toggleVisibilities("form");
         // TODO: leggere la tipologia di oggetto selezionato ed utilizzarlo per filtrare le form
         self.getForm();
-        self.toggleVisibilities("form");
     };
     self.OnClickItem = function (itemData) {
-        var itemDataJS = ko.toJS(itemData)
-        self.ItemDetails.setProperties(itemDataJS);
         self.toggleVisibilities("itemDetails");
-    };
-    self.onClickEditItem = function () {
-        //self.ItemDetails.OriginId;
-        self.getForm();
-        self.toggleVisibilities("form");
-    };
-    self.onClickDeleteItem = function () {
-        var itemOriginId = self.ItemDetails.OriginId();
-        self.deleteItems(itemOriginId);
-        self.toggleVisibilities("itemsList");
+
+        var itemDataJS = ko.toJS(itemData);
+        self.ItemDetails.setProperties(itemDataJS);
+        self.getItem();
     };
     self.onClickDeleteItems = function () {
+        self.toggleVisibilities("itemsList");
 
         // get the selected items
         var selectedItemsOriginId = new Array();
@@ -369,18 +422,8 @@ function ViewModel(baseUrl) {
         });
 
         self.deleteItems(selectedItemsOriginId);
-        self.toggleVisibilities("itemsList");
-    };
-    self.onClickExecuteForm = function () {
-        self.addItem();
-        self.toggleVisibilities("itemsList");
-    };
-
-    self.onClickBackButton = function () {
-        self.toggleVisibilities("itemslist");
     };
     self.onClickLoadMore = function () {
-        self.getSharepointDocuments();
     };
     self.onClickToggleMassiveSelection = function () {
         ko.utils.arrayForEach(self.DocumentsList.Documents(), function (document) {
@@ -393,14 +436,41 @@ function ViewModel(baseUrl) {
         self.IsMassiveSelection(!self.IsMassiveSelection());
     };
     self.clickItemChangeSelection = function (itemClicked) {
-        itemClicked.IsSelected(!itemClicked.IsSelected());   
+        itemClicked.IsSelected(!itemClicked.IsSelected());
     };
     self.onClickChangePageDimension = function (itemClicked) {
         self.ItemsList.Items.removeAll();
         self.ItemsList.PageDimension(itemClicked.Value);
         self.getItems();
-    }
-    /* ======================================= */
+    };
+    self.onClickChangeItemTypeOriginId = function (itemClicked) {
+        self.ItemsList.Items.removeAll();
+        self.ItemsList.ItemTypeOriginId(itemClicked.Value);
+        self.getItems();
+    };
+
+    /* =============== 3. ITEMDETAILs ============= */
+    self.onClickEditItem = function () {
+        self.toggleVisibilities("form");
+
+        self.getForm();
+    };
+    self.onClickDeleteItem = function () {
+        self.toggleVisibilities("itemsList");
+
+        var itemOriginId = self.ItemDetails.OriginId();
+        self.deleteItems(itemOriginId);
+    };
+    self.onClickBackButton = function () {
+        self.toggleVisibilities("itemsList");
+    };
+
+    /* =============== 4. FORM ============= */
+    self.onClickExecuteForm = function () {
+        self.toggleVisibilities("itemsList");
+
+        self.addItem();
+    };
 
     self.Init();
 }
@@ -466,6 +536,8 @@ ko.bindingHandlers.fadeVisible = {
 /* ======================================= */
 
 /* ================ MODELSs =============== */
+
+/* ================ 1. GENERAL =============== */
 function VisibilitiesViewModel() {
     var self = this;
     self.DashboardVisible = ko.observable(false);
@@ -474,6 +546,14 @@ function VisibilitiesViewModel() {
     self.FormVisible = ko.observable(false);
 }
 
+function ConfigurationsViewModel() {
+    var self = this;
+    self.PageDimensions = ko.observableArray([]);
+    self.ItemTypesOriginId = ko.observableArray([]);
+    self.DefaultItemTypeOriginId = null;
+}
+
+/* ================ 2. FROM =============== */
 function FormViewModel() {
     var self = this;
     self.Name = ko.observable();
@@ -482,21 +562,57 @@ function FormViewModel() {
 
 function InputViewModel(itemData) {
     var self = this;
-    self.Name = ko.observable(itemData.Name);
-    self.Type = ko.observable(itemData.Type);
-    self.DisplayName = ko.observable(itemData.DisplayName);
-    self.Values = ko.observableArray(itemData.Values);
-    self.Value = ko.observable("")
+    self.Name = ko.observable(null);
+    self.Type = ko.observable(null);
+    self.Values = ko.observableArray(null);
+    self.Value = ko.observable(null);
+    self.LocalizedName = ko.observable(null);
+
+    self.setProperties = function (itemData) {
+        self.Name(itemData.Name);
+        self.Type(itemData.Type);
+        self.Values(itemData.Values);
+        self.Value(itemData.Value);
+        self.LocalizedName(itemData.localizedName);
+    };
 }
 
+/* ================ 3. ITEMLIST =============== */
 function ItemsListViewModel() {
     var self = this;
     self.Headers = ko.observableArray([]);
     self.Items = ko.observableArray([]);
     self.PageDimension = ko.observable();
-    self.ItemType = ko.observable();
+    self.ItemTypeOriginId = ko.observable();
     self.Page = ko.observable(0);
 }
+
+function HeaderViewModel() {
+    var self = this;
+    self.Name = ko.observable(null);
+    self.LocalizedName = null;
+
+    self.setProperties = function (itemData) {
+        self.Name(itemData.Name);
+        self.LocalizedName = itemData.LocalizedName;
+    }
+}
+
+/* ================ 4. ITEMLIST FILTERS =============== */
+
+function PageDimensionViewModel(itemData) {
+    var self = this;
+    self.Value = itemData.Value;
+    self.IsSelected = ko.observable(false);
+}
+
+function ItemTypeOriginIdViewModel(itemData) {
+    var self = this;
+    self.Value = itemData.Value;
+    self.IsSelected = ko.observable(false);
+}
+
+/* ================ 5. ITEMLIST AND ITEMDETAILs =============== */
 
 function ItemViewModel() {
     var self = this;
@@ -518,38 +634,29 @@ function ItemViewModel() {
 
         var properties = new Array();
         ko.utils.arrayForEach(itemData.Properties, function (property) {
-            var propertyToAdd = new PropertyViewModel(property);
+            var propertyToAdd = new PropertyViewModel();
+            propertyToAdd.setProperties(property);
             properties.push(propertyToAdd);
         });
         self.Properties(properties);
-    }
-}
-
-function HeaderViewModel() {
-    var self = this;
-    self.DisplayName = ko.observable();
+    };
 }
 
 function PropertyViewModel(itemData) {
     var self = this;
-    self.OriginId = itemData.OriginId;
-    self.DisplayName = itemData.DisplayName;
-    self.Name = itemData.Name;
-    self.Value = itemData.Value;
+    self.OriginId = ko.observable(null);
+    self.Name = ko.observable(null);
+    self.Value = ko.observable(null);
+    self.LocalizedName = ko.observable(null);
+
+    self.setProperties = function (itemData) {
+        self.OriginId(itemData.OriginId);
+        self.Name(itemData.Name);
+        self.Value(itemData.Value);
+        self.LocalizedName(itemData.LocalizedName);
+    }
 }
 
-function PageDimensionViewModel(itemData) {
-    var self = this;
-    self.Value = itemData.Value;
-    self.IsSelected = ko.observable(false);
-}
-
-function ConfigurationsViewModel() {
-    var self = this;
-    self.PageDimensions = ko.observableArray([]);
-}
-
-/* ======================================= */
 
 /* ================ EVENTs =============== */
 $(document).ready(function (e) {
@@ -569,4 +676,3 @@ $(document).on('click', 'li.dropdown.mega-dropdown a', function (event) {
 $(document).on("click", ".sidebar-toggle", function () {
     $(".wrapper").toggleClass("toggled");
 });
-/* ======================================= */

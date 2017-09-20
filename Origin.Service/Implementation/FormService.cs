@@ -78,8 +78,6 @@ namespace Origin.Service
                         Id = i.Id,
                         OriginId = i.OriginId,
                         Name = i.Name,
-                        // TODO: Collegare alle localizzzioni
-                        DisplayName = "",
                         Type = i.Type,
                         // TODO: pensare come gestire il campo required
                         Required = "",
