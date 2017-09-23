@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:54445/LookupService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OriginStudio.Service" />
+  <xs:element name="GetLookups">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLookupsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OriginStudio.Service" minOccurs="0" name="GetLookupsResult" nillable="true" type="q1:ArrayOfOR_Lookup" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLookup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lookupOriginId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLookupResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/OriginStudio.Service" minOccurs="0" name="GetLookupResult" nillable="true" type="q2:OR_Lookup" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValuesByLookup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lookupOriginId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValuesByLookupResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OriginStudio.Service" minOccurs="0" name="GetValuesByLookupResult" nillable="true" type="q3:ArrayOfOR_LookupValue" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

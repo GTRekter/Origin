@@ -4,6 +4,6 @@
     {
         public string ActionName { get; set; }
 
-        public string ItemType { get; set; }
+        public string ItemTypeOriginId { get; set; }
     }
 }

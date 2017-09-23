@@ -118,8 +118,8 @@ namespace Origin.Service
                                         Id = i.Id,
                                         OriginId = i.OriginId,
                                         ItemTypeOriginId = i.ItemTypeOriginId,
-                                        //CreationDate = i.CreationDate.ToString(_configuration.Date.Format),
-                                        //LastEditDate = i.LastEditDate.ToString(_configuration.Date.Format),
+                                        CreationDate = formatDate(i.CreationDate),
+                                        LastEditDate = formatDate(i.LastEditDate),
                                         Properties = _dataContext.OR_Properties
                                                         .Where(p => p.RelatedOriginId == i.OriginId)
                                                         .Where(p => _configuration.ItemLists.ItemLists
@@ -137,6 +137,7 @@ namespace Origin.Service
                                                         .ToList()                                                   
                                     })
                                     .ToList();
+
             }
             catch (Exception exc)
             {
@@ -167,8 +168,8 @@ namespace Origin.Service
                                         Id = i.Id,
                                         OriginId = i.OriginId,
                                         ItemTypeOriginId = i.ItemTypeOriginId,
-                                        //CreationDate = i.CreationDate.ToString(_configuration.Date.Format),
-                                        //LastEditDate = i.LastEditDate.ToString(_configuration.Date.Format),
+                                        CreationDate = formatDate(i.CreationDate),
+                                        LastEditDate = formatDate(i.LastEditDate),
                                         Properties = _dataContext.OR_Properties
                                                         .Where(p => p.RelatedOriginId == i.OriginId)
                                                         .Where(p => _configuration.ItemDetails
@@ -300,6 +301,11 @@ namespace Origin.Service
                                     .Where(it => it.Name.Equals(name))
                                     .FirstOrDefault();
             return itemType;
+        }
+
+        private string formatDate(DateTime date)
+        {
+            return date.ToString(_configuration.Date.Format);
         }
 
         #endregion

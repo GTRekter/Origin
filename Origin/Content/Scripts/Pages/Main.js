@@ -151,7 +151,15 @@ function ViewModel(baseUrl) {
                         headerToAdd.setProperties(header);
                         self.ItemsList.Headers.push(headerToAdd);
                     });
- 
+
+                    //// set itemsList actions
+                    //self.ItemsList.Actions.removeAll();
+                    //ko.utils.arrayForEach(viewModel.Actions, function (action) {
+                    //    var actionToAdd = new ActionViewModel();
+                    //    actionToAdd.setProperties(action);
+                    //    self.ItemsList.Actions.push(actionToAdd);
+                    //});
+
                     self.addItemsToItemsList(viewModel);
                 } else {
                     self.IsError(true);
@@ -182,7 +190,7 @@ function ViewModel(baseUrl) {
             dataType: 'json',
             success: function (viewModel) {
                 if (viewModel.ResultInfo.Result === 0) {
-                    self.ItemDetails.setProperties(viewModel.Item);
+                    self.ItemDetails.setProperties(viewModel.Item, self.Resources());
                 } else {
                     self.IsError(true);
                     self.ErrorDetails = self.localizedText(viewModel.ResultInfo.ErrorMessage);
@@ -202,8 +210,7 @@ function ViewModel(baseUrl) {
             ajaxData = {
                 // TODO: lette da un'observable
                 actionName: "Add",
-                // TODO: lette da un'observable
-                itemType: "Dog"
+                ItemTypeOriginId: self.ItemsList.ItemTypeOriginId()
             };
         $.ajax({
             type: "POST",
@@ -220,7 +227,10 @@ function ViewModel(baseUrl) {
                     self.Form.Name(viewModel.Name);
 
                     ko.utils.arrayForEach(viewModel.Inputs, function (input) {
-                        var inputToAdd = new InputViewModel(input);
+                        var inputToAdd = new InputViewModel();
+                        inputToAdd.setProperties(input);
+                        inputToAdd.setLocalization(self.Resources());
+
                         self.Form.Inputs.push(inputToAdd);
                     });
 
@@ -282,7 +292,7 @@ function ViewModel(baseUrl) {
         var items = new Array(self.ItemsList.Items());
         ko.utils.arrayForEach(viewModel.Items, function (item) {
             var itemToAdd = new ItemViewModel();
-            itemToAdd.setProperties(item);
+            itemToAdd.setProperties(item, self.Resources());
             self.ItemsList.Items.push(itemToAdd);
         });
 
@@ -406,7 +416,7 @@ function ViewModel(baseUrl) {
         self.toggleVisibilities("itemDetails");
 
         var itemDataJS = ko.toJS(itemData);
-        self.ItemDetails.setProperties(itemDataJS);
+        self.ItemDetails.setProperties(itemDataJS, self.Resources());
         self.getItem();
     };
     self.onClickDeleteItems = function () {
@@ -452,7 +462,7 @@ function ViewModel(baseUrl) {
     /* =============== 3. ITEMDETAILs ============= */
     self.onClickEditItem = function () {
         self.toggleVisibilities("form");
-
+        // TODO: Handle the type of action programmatically
         self.getForm();
     };
     self.onClickDeleteItem = function () {
@@ -474,7 +484,6 @@ function ViewModel(baseUrl) {
 
     self.Init();
 }
-/* ======================================= */
 
 /* ================ BINDINGs =============== */
 ko.bindingHandlers.datepicker = {
@@ -533,10 +542,8 @@ ko.bindingHandlers.fadeVisible = {
         }
     }
 };
-/* ======================================= */
 
 /* ================ MODELSs =============== */
-
 /* ================ 1. GENERAL =============== */
 function VisibilitiesViewModel() {
     var self = this;
@@ -573,7 +580,13 @@ function InputViewModel(itemData) {
         self.Type(itemData.Type);
         self.Values(itemData.Values);
         self.Value(itemData.Value);
-        self.LocalizedName(itemData.localizedName);
+    };
+    self.setLocalization = function (localizations) {
+        if (localizations !== null && localizations["Section.Form.Input." + self.Name()] === undefined) {
+            self.LocalizedName("RES NOT FOUND: Section.Form.Input." + self.Name());
+        } else {
+            self.LocalizedName(localizations["Section.Form.Input." + self.Name()]);
+        }
     };
 }
 
@@ -582,6 +595,7 @@ function ItemsListViewModel() {
     var self = this;
     self.Headers = ko.observableArray([]);
     self.Items = ko.observableArray([]);
+    //self.Actions = ko.observableArray([]);
     self.PageDimension = ko.observable();
     self.ItemTypeOriginId = ko.observable();
     self.Page = ko.observable(0);
@@ -599,7 +613,6 @@ function HeaderViewModel() {
 }
 
 /* ================ 4. ITEMLIST FILTERS =============== */
-
 function PageDimensionViewModel(itemData) {
     var self = this;
     self.Value = itemData.Value;
@@ -626,7 +639,7 @@ function ItemViewModel() {
         return self.IsSelected() ? "ion-ios-checkmark-outline" : "ion-ios-circle-outline" ;
     }, self);
 
-    self.setProperties = function (itemData) {
+    self.setProperties = function (itemData, localizations) {
         self.OriginId(itemData.OriginId);
         self.ItemTypeOriginId(itemData.ItemTypeOriginId);
         self.CreationDate(itemData.CreationDate);
@@ -636,6 +649,7 @@ function ItemViewModel() {
         ko.utils.arrayForEach(itemData.Properties, function (property) {
             var propertyToAdd = new PropertyViewModel();
             propertyToAdd.setProperties(property);
+            propertyToAdd.setLocalization(localizations);
             properties.push(propertyToAdd);
         });
         self.Properties(properties);
@@ -653,10 +667,35 @@ function PropertyViewModel(itemData) {
         self.OriginId(itemData.OriginId);
         self.Name(itemData.Name);
         self.Value(itemData.Value);
-        self.LocalizedName(itemData.LocalizedName);
     }
+
+    self.setLocalization = function (localizations) {
+        if (localizations !== null && localizations["Section.ItemDetails.Property." + self.Name()] === undefined) {
+            self.LocalizedName("RES NOT FOUND: Section.ItemDetails.Property." + self.Name());
+        } else {
+            self.LocalizedName(localizations["Section.ItemDetails.Property." + self.Name()]);
+        }
+    };
 }
 
+function ActionViewModel(itemData) {
+    var self = this;
+    self.OriginId = ko.observable(null);
+    self.Name = ko.observable(null);
+    self.LocalizedName = ko.observable(null);
+
+    self.setProperties = function (itemData) {
+        self.OriginId(itemData.OriginId);
+        self.Name(itemData.Name);
+    }
+    self.setLocalization = function (localizations) {
+        if (localizations !== null && localizations["Section.ItemDetails.Action." + self.Name()] === undefined) {
+            self.LocalizedName("RES NOT FOUND: Section.ItemDetails.Action." + self.Name());
+        } else {
+            self.LocalizedName(localizations["Section.ItemDetails.Action." + self.Name()]);
+        }
+    };
+}
 
 /* ================ EVENTs =============== */
 $(document).ready(function (e) {

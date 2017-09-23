@@ -39,5 +39,6 @@ namespace Origin.Service.Models.Responses
 
             public string Value { get; set; }
         }
+
     }
 }

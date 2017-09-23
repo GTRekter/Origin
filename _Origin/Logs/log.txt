@@ -1,2 +1,0 @@
-2017-05-31 10:20:01,106 DEBUG FileExtractor.Service.SharepointService – Items.Count80
-2017-05-31 10:20:01,110 DEBUG FileExtractor.Service.SharepointService – [GetDocuments] End

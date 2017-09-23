@@ -1,2 +1,0 @@
-2017-05-23 09:24:50,197 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
-2017-05-23 09:24:54,446 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] directoryInfo: E:\Development\R_D\FileExtractor\FileExtractor\FileExtractor\Temp

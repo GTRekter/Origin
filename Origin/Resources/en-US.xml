@@ -39,7 +39,18 @@
   <resource key="Section.ItemDetails.Button.Delete" value="Delete" />
   <resource key="Section.ItemDetails.Button.Edit" value="Edit" />
 
+  <resource key="Section.ItemDetails.Property.Name" value="Name" />
+  <resource key="Section.ItemDetails.Property.Gender" value="Gender" />
+  <resource key="Section.ItemDetails.Property.Race" value="Race" />
+
   <!-- FORM -->
   <resource key="Section.Form.Title" value="Form" />
-  <resource key="Section.For.Subtitle" value="Execute a specific type of operation" />
+  <resource key="Section.Form.Subtitle" value="Execute a specific type of operation" />
+
+  <resource key="Section.Form.Input.Name" value="Name" />
+  <resource key="Section.Form.Input.Gender" value="Gender" />
+  <resource key="Section.Form.Input.Race" value="Race" />
+
+  <!--<resource key="Section.Form.Button.Back" value="Back" />-->
+  <resource key="Section.Form.Button.Execute" value="Execute" />
 </resources>

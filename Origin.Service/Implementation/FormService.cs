@@ -44,17 +44,18 @@ namespace Origin.Service
 
                 var form = context.OR_ItemActions
                                 .Where(ia => ia.Name.Equals(request.ActionName))
-                                .Join(context.OR_ItemTypes,
-                                    ia => ia.ItemTypeOriginId,
-                                    it => it.OriginId,
-                                    (ia, it) => new
-                                    {
-                                        ItemTypeName = it.Name,
-                                        ItemActionFormOriginId = ia.FormOriginId
-                                    })
-                                .Where(f => f.ItemTypeName.Equals(request.ItemType))
+                                //.Join(context.OR_ItemTypes,
+                                //    ia => ia.ItemTypeOriginId,
+                                //    it => it.OriginId,
+                                //    (ia, it) => new
+                                //    {
+                                //        ItemTypeName = it.Name,
+                                //        ItemActionFormOriginId = ia.FormOriginId
+                                //    })
+                                //.Where(f => f.ItemTypeName.Equals(request.ItemType))
+                                .Where(ia => ia.ItemTypeOriginId.Equals(request.ItemTypeOriginId))
                                 .Join(context.OR_Forms,
-                                    j => j.ItemActionFormOriginId,
+                                    j => j.FormOriginId,
                                     f => f.OriginId,
                                     (j, f) => new
                                     {

@@ -1,8 +1,0 @@
-2017-05-23 10:44:10,671 DEBUG FileExtractor.Service.SharepointService – Items.Count15
-2017-05-23 10:44:10,723 DEBUG FileExtractor.Service.SharepointService – [exportAsyncDocumentsAndMetadata] Start
-2017-05-23 10:44:12,583 DEBUG FileExtractor.Service.SharepointService – [exportAsyncCSVWithMetadata] Get item number 0 from SharePoint with ID: 17542
-2017-05-23 10:44:35,284 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
-2017-05-23 10:44:35,284 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] directoryInfo: E:\Development\R_D\FileExtractor\FileExtractor\FileExtractor\Temp
-2017-05-23 10:44:35,284 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] fileNames: asdasd.zip, dasd.zip, Db.sdf, iva.zip
-2017-05-23 10:44:35,288 DEBUG FileExtractor.Service.SharepointService – [cleanTemporaryFolder] Start
-2017-05-23 10:44:35,291 DEBUG FileExtractor.Service.SharepointService – [ExportAsyncDocuments] Start

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configuration>
   
-  <Date Format="YYYY-MM-DD" />
+  <Date Format="yyyy-MM-dd" />
   
   <ItemLists DefaultItemTypeOriginId="657fb42a-1914-481c-b41b-8743ea97a3a3">
 
@@ -15,10 +15,17 @@
           <VisibleField Name="Name" />
           <VisibleField Name="Gender" />
         </VisibleFields>
+        <Actions>
+          <!-- TODO: pensare a come gestire l'add, edit, il delete e le altre azioni -->
+          <!--<Action OriginId="83596701-e818-4600-89be-c5770d53a28e" />-->
+        </Actions>
       </ItemList>
-      <!--<Actions>
-        <Action OriginId="83596701-e818-4600-89be-c5770d53a28e" />
-      </Actions>-->
+      
+      <ItemList ItemTypeOriginId="d2281592-f600-4389-bc44-e64eaa97def1">
+        <VisibleFields>
+          <VisibleField Name="Name" />
+        </VisibleFields>
+      </ItemList>
     </ItemLists>
     
   </ItemLists>
@@ -28,6 +35,7 @@
       <VisibleFields>
         <VisibleField Name="Name" />
         <VisibleField Name="Gender" />
+        <VisibleField Name="Race" />
       </VisibleFields>
     </ItemDetail>
   </ItemDetails>
