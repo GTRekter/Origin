@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<resources>
-  
-  <!-- FORM MENU -->
-  <resource key="Global.UnexpectedErrorDialog.Title" value="Opsss... Si è verificato un errore inatteso" />
-
-</resources>
