@@ -1,0 +1,59 @@
+﻿<div class="row" data-bind="visible: visibilities.itemDetailsVisible">
+    <!-- ITEMDETAILS -->
+    <div class="col-xs-12">
+        <div class="content-header">
+            <h1 data-bind="text: $root.localizedText('Section.ItemDetails.Title')"></h1>
+            <p data-bind="text: $root.localizedText('Section.ItemDetails.Subtitle')"></p>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label data-bind="text: $root.localizedText('Section.ItemDetails.OriginId')"></label>
+                            <spam data-bind="text: itemDetails.originId()"></spam>
+                        </div>
+                        <div class="form-group">
+                            <label data-bind="text: $root.localizedText('Section.ItemDetails.ItemTypeOriginId')"></label>
+                            <spam data-bind="text: itemDetails.itemTypeOriginId()"></spam>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label data-bind="text: $root.localizedText('Section.ItemDetails.CreationDate')"></label>
+                            <spam data-bind="text: itemDetails.creationDate()"></spam>
+                        </div>
+                        <div class="form-group">
+                            <label data-bind="text: $root.localizedText('Section.ItemDetails.LastEditDate')"></label>
+                            <spam data-bind="text: itemDetails.lastEditDate()"></spam>
+                        </div>
+                    </div>
+                    <!-- ko foreach: itemDetails.properties -->
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label data-bind="text: LocalizedName"></label>
+                            <spam data-bind="text: Value"></spam>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button type="button" class="btn btn-default" data-bind="click: onClickBackButton">
+                    <span data-bind="text: $root.localizedText('Section.ItemDetails.Button.Back')"></span>
+                </button>
+                <button type="button" class="btn btn-danger" data-bind="click: onClickDeleteItem">
+                    <i class="ion-ios-trash"></i>
+                    <span data-bind="text: $root.localizedText('Section.ItemDetails.Button.Delete')"></span>
+                </button>
+                <button type="button" class="btn btn-primary" data-bind="click: onClickEditItem">
+                    <i class="ion-edit"></i>
+                    <span data-bind="text: $root.localizedText('Section.ItemDetails.Button.Edit')"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- END ITEMDETAILS -->
+</div>

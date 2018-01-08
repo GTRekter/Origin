@@ -1,0 +1,65 @@
+﻿/* Login Styles */
+[data-element-id="login"] {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/login_background.jpg');
+}
+    [data-element-id="login"] a:focus {
+        color: #666666;
+        text-decoration: none;
+    }
+    [data-element-id="login"] .col-full-height {
+        height: 100vh;
+    }
+    [data-element-id="login"] .heading {
+        color: #666666;
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 28px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+    [data-element-id="login"] .panel {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 0px;
+        padding: 30px;
+    }
+    [data-element-id="login"] input {
+        border-color: #666666;
+        border-radius: 0px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        padding: 6px 10px;
+    }
+        [data-element-id="login"] input:focus {
+            border-color: #0067b8;
+            box-shadow: none;
+        }
+    [data-element-id="login"] .btn {
+        background-color: #005da6;
+        border-color: #005da6;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        padding: 6px 12px;
+    }
+        [data-element-id="login"] .btn:focus {
+            border-color: #666666;
+        }
+    [data-element-id="login"] .alert-error {
+        color: #e81123;
+        font-size: 14px;
+        font-weight: 400;
+    }
+    [data-element-id="login"] .register-link {
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+    [data-element-id="login"] .validation-summary-errors ul {
+        padding-left: 10px;
+        color: #e81123;
+        font-size: 14px;
+        font-weight: 400;
+    }

@@ -1,0 +1,9 @@
+Code-First has two commands for code based migration:
+Add-migration: It will scaffold the next migration for the changes you have made to your domain classes 
+Update-database: It will apply pending changes to the database based on latest scaffolding code file you created using "Add-Migration" command
+
+example:
+Add-migration -context ApplicationDbContext
+Add-migration -context OriginContext
+update-database -context ApplicationDbContext
+update-database -context OriginContext
