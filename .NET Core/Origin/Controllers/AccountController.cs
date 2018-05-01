@@ -94,6 +94,7 @@ namespace Origin.Controllers
                 }
                 else
                 {
+                    // TODO: Localize this fucking string
                     ModelState.AddModelError("Error", "Invalid login attempt.");
                     return View(model);
                 }

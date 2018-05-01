@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Origin.Models.Store
 {
-    public class OR_User : IdentityUser<Guid>
+    public class OR_User : IdentityUser<int>
     {
         #region Constructor
 
@@ -17,34 +17,31 @@ namespace Origin.Models.Store
 
         #endregion
 
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        private Guid _id;
-        [StringLength(255), Required]
-        private string _name;
-        [StringLength(255), Required]
-        private string _surname;
-        [StringLength(50), Required]
-        private string _phoneNumber;
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        private bool _phoneNumberConfirmed;
-        [Required]
-        private string _email;
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        private bool _emailConfirmed;
-        [Required]
-        private string _passwordHash;
+        #region Fields
 
-        public override Guid Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public override int Id { get; set; }
+
+        public Guid OriginId { get; set; }
+
+        //[StringLength(255), Required]
+        private string _name;
+
+        //[StringLength(255), Required]
+        private string _surname;
+
+        [Phone]
+        public override string PhoneNumber { get; set; }
+
+        [EmailAddress, Required]
+        public override string Email { get; set; }
+
+        [Required]
+        public override string PasswordHash { get; set; }
+
+        #endregion
+
+        #region Properties
 
         public string Name
         {
@@ -70,64 +67,6 @@ namespace Origin.Models.Store
             }
         }
 
-        public override string PhoneNumber
-        {
-            get
-            {
-                return _phoneNumber;
-            }
-            set
-            {
-                _phoneNumber = value;
-            }
-        }
-
-        public override bool PhoneNumberConfirmed
-        {
-            get
-            {
-                return _phoneNumberConfirmed;
-            }
-            set
-            {
-                _phoneNumberConfirmed = value;
-            }
-        }
-
-        public override string Email
-        {
-            get
-            {
-                return _email;
-            }
-            set
-            {
-                _email = value;
-            }
-        }
-
-        public override bool EmailConfirmed
-        {
-            get
-            {
-                return _emailConfirmed;
-            }
-            set
-            {
-                _emailConfirmed = value;
-            }
-        }
-
-        public override string PasswordHash
-        {
-            get
-            {
-                return _passwordHash;
-            }
-            set
-            {
-                _passwordHash = value;
-            }
-        }
+        #endregion
     }
 }

@@ -9,6 +9,7 @@
 
   <!-- SIDEBAR -->
   <resource key="Sidebar.Links.Dashboard" value="Dashboard" />
+  <resource key="Sidebar.Links.ItemTypesList" value="Item Types List" />
   <resource key="Sidebar.Links.ItemsList" value="Items List" />
   <resource key="Sidebar.Links.Configuration" value="Settings" />
   <resource key="Sidebar.Links.Back" value="Back" />

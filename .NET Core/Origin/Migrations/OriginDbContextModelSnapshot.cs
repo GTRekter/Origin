@@ -6,22 +6,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Origin.Models;
+using Origin.Models.Enums;
 using System;
 
 namespace Origin.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180104220453_Identity")]
-    partial class Identity
+    [DbContext(typeof(OriginDbContext))]
+    partial class OriginDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -30,7 +30,7 @@ namespace Origin.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<Guid>("RoleId");
+                    b.Property<int>("RoleId");
 
                     b.HasKey("Id");
 
@@ -39,7 +39,7 @@ namespace Origin.Migrations
                     b.ToTable("OR_RoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -48,7 +48,7 @@ namespace Origin.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -57,13 +57,13 @@ namespace Origin.Migrations
                     b.ToTable("OR_UserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider");
 
                     b.Property<string>("ProviderKey");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<int>("UserId");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -76,11 +76,11 @@ namespace Origin.Migrations
                     b.ToTable("OR_UserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.Property<Guid>("UserId");
+                    b.Property<int>("UserId");
 
-                    b.Property<Guid>("RoleId");
+                    b.Property<int>("RoleId");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -89,9 +89,9 @@ namespace Origin.Migrations
                     b.ToTable("OR_UserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.Property<Guid>("UserId");
+                    b.Property<int>("UserId");
 
                     b.Property<string>("LoginProvider");
 
@@ -104,11 +104,154 @@ namespace Origin.Migrations
                     b.ToTable("OR_UserTokens");
                 });
 
+            modelBuilder.Entity("Origin.Models.Store.OR_Form", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid>("OriginId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OR_Forms");
+                });
+
+            modelBuilder.Entity("Origin.Models.Store.OR_Input", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("FormOriginId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid>("OriginId");
+
+                    b.Property<int>("Type");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OR_Inputs");
+                });
+
+            modelBuilder.Entity("Origin.Models.Store.OR_Item", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<Guid>("ItemTypeOriginId");
+
+                    b.Property<DateTime>("LastEditDate");
+
+                    b.Property<Guid>("OriginId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OR_Items");
+                });
+
+            modelBuilder.Entity("Origin.Models.Store.OR_ItemAction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("FormOriginId");
+
+                    b.Property<Guid>("ItemTypeOriginId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid>("OriginId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OR_ItemActions");
+                });
+
+            modelBuilder.Entity("Origin.Models.Store.OR_ItemType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid>("OriginId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OR_ItemTypes");
+                });
+
+            modelBuilder.Entity("Origin.Models.Store.OR_Lookup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid>("OriginId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OR_Lookups");
+                });
+
+            modelBuilder.Entity("Origin.Models.Store.OR_LookupValue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("LookupOriginId");
+
+                    b.Property<Guid>("OriginId");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OR_LookupValues");
+                });
+
+            modelBuilder.Entity("Origin.Models.Store.OR_Property", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("ItemTypeOriginId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid>("OriginId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OR_Properties");
+                });
+
+            modelBuilder.Entity("Origin.Models.Store.OR_PropertyValue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("ItemOriginId");
+
+                    b.Property<Guid>("PropertyOriginId");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OR_PropertyValues");
+                });
+
             modelBuilder.Entity("Origin.Models.Store.OR_Role", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("NewId()");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -131,9 +274,8 @@ namespace Origin.Migrations
 
             modelBuilder.Entity("Origin.Models.Store.OR_User", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("NewId()");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
 
@@ -141,6 +283,7 @@ namespace Origin.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
@@ -157,7 +300,10 @@ namespace Origin.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
 
-                    b.Property<string>("PasswordHash");
+                    b.Property<Guid>("OriginId");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired();
 
                     b.Property<string>("PhoneNumber");
 
@@ -185,7 +331,7 @@ namespace Origin.Migrations
                     b.ToTable("OR_Users");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Origin.Models.Store.OR_Role")
                         .WithMany()
@@ -193,7 +339,7 @@ namespace Origin.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.HasOne("Origin.Models.Store.OR_User")
                         .WithMany()
@@ -201,7 +347,7 @@ namespace Origin.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.HasOne("Origin.Models.Store.OR_User")
                         .WithMany()
@@ -209,7 +355,7 @@ namespace Origin.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
                     b.HasOne("Origin.Models.Store.OR_Role")
                         .WithMany()
@@ -222,7 +368,7 @@ namespace Origin.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
                     b.HasOne("Origin.Models.Store.OR_User")
                         .WithMany()

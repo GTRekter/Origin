@@ -1,75 +1,27 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Origin.Models.Store
 {
     public class OR_Item
     {
+        #region Fields
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        private int _id;
-        private Guid _originId;
-        private Guid _itemTypeOriginId;
-        private DateTime _creationDate;
-        private DateTime _lastEditDate;
+        public int Id { get; set; }
 
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
+        public Guid OriginId { get; set; }
 
-        public Guid OriginId
-        {
-            get
-            {
-                return _originId;
-            }
-            set
-            {
-                _originId = value;
-            }
-        }
+        [Required]
+        public Guid ItemTypeOriginId { get; set; }
 
-        public Guid ItemTypeOriginId
-        {
-            get
-            {
-                return _itemTypeOriginId;
-            }
-            set
-            {
-                _itemTypeOriginId = value;
-            }
-        }
+        [Required]
+        public DateTime CreationDate { get; set; }
 
-        public DateTime CreationDate
-        {
-            get
-            {
-                return _creationDate;
-            }
-            set
-            {
-                _creationDate = value;
-            }
-        }
+        [Required]
+        public DateTime LastEditDate { get; set; }
 
-        public DateTime LastEditDate
-        {
-            get
-            {
-                return _lastEditDate;
-            }
-            set
-            {
-                _lastEditDate = value;
-            }
-        }
+        #endregion
     }
 }

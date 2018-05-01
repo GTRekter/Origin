@@ -1,39 +1,24 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Origin.Models.Store
 {
     public class OR_Form
     {
+        #region Fields
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        private int _id;
-        private Guid _originId;
+        public int Id { get; set; }
+
+        public Guid OriginId { get; set; }
+
+        [Required(ErrorMessage = "A type name is required")]
         private string _name;
-        private string _type;
 
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
+        #endregion
 
-        public Guid OriginId
-        {
-            get
-            {
-                return _originId;
-            }
-            set
-            {
-                _originId = value;
-            }
-        }
+        #region Properties
 
         public string Name
         {
@@ -43,20 +28,17 @@ namespace Origin.Models.Store
             }
             set
             {
-                _name = value;
+                if (String.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Invalid type name");
+                }
+                else
+                {
+                    _name = value;
+                }
             }
         }
 
-        public string Type
-        {
-            get
-            {
-                return _type;
-            }
-            set
-            {
-                _type = value;
-            }
-        }
+        #endregion
     }
 }

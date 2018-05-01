@@ -1,51 +1,27 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Origin.Models.Store
 {
     public class OR_LookupValue
     {
+        #region Fields
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        private int _id;
-        private Guid _originId;
-        private Guid _relatedOriginId;
+        public int Id { get; set; }
+
+        public Guid OriginId { get; set; }
+
+        [Required]
+        public Guid LookupOriginId { get; set; }
+
+        [Required(ErrorMessage = "A value is required")]
         private string _value;
 
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
+        #endregion
 
-        public Guid OriginId
-        {
-            get
-            {
-                return _originId;
-            }
-            set
-            {
-                _originId = value;
-            }
-        }
-
-        public Guid RelatedOriginId
-        {
-            get
-            {
-                return _relatedOriginId;
-            }
-            set
-            {
-                _relatedOriginId = value;
-            }
-        }
+        #region Properties
 
         public string Value
         {
@@ -55,8 +31,17 @@ namespace Origin.Models.Store
             }
             set
             {
-                _value = value;
+                if (String.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Invalid value");
+                }
+                else
+                {
+                    _value = value;
+                }
             }
         }
+
+        #endregion
     }
 }

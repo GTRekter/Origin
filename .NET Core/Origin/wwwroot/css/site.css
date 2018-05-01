@@ -72,7 +72,7 @@
 .btn-primary:hover,
 .btn-primary:target {
     min-width: 30px;
-    background-color: #007078 !important;
+    background-color: #0067B8 !important;
     border: 1px solid #034e53;
     color: #ffffff;
 }
@@ -111,8 +111,8 @@ a:focus {
 
 /* ==== 3. START: TOP NAVBAR ==== */
 .topbar {
-    background: #007078;
-    border-color: #007078;
+    background: #0067B8;
+    border-color: #0067B8;
     border-radius: 0px;
     color: #FFFFFF;
 }
@@ -184,13 +184,13 @@ a:focus {
                         color: #fff;
                         background: #fff;
                         background: rgba(255,255,255,0.2);
-                        border-left: 2px solid #007078;
+                        border-left: 2px solid #0067B8;
                     }
                 .sidebar > .sidebar-nav > li a:active {
                     text-decoration: none;
                 }
             .sidebar > .sidebar-nav > li.active a {
-                border-left: 5px solid #007078;
+                border-left: 5px solid #0067B8;
                 padding: 0px;
             }
             .sidebar > .sidebar-nav > li span {
@@ -344,7 +344,7 @@ a:focus {
         text-align: center;
         font-size: 45px;
         line-height: 90px;
-        background-color: #007078;
+        background-color: #0067B8;
         color: #fff;
     }
 

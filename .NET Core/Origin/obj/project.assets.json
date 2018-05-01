@@ -13127,15 +13127,12 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\ivanp\\Documents\\Visual Studio 2017\\Projects\\Origin\\Origin\\Origin.csproj",
+      "projectUniqueName": "C:\\Users\\ivanp\\Desktop\\Origin\\.NET Core\\Origin\\Origin.csproj",
       "projectName": "Origin",
-      "projectPath": "C:\\Users\\ivanp\\Documents\\Visual Studio 2017\\Projects\\Origin\\Origin\\Origin.csproj",
+      "projectPath": "C:\\Users\\ivanp\\Desktop\\Origin\\.NET Core\\Origin\\Origin.csproj",
       "packagesPath": "C:\\Users\\ivanp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ivanp\\Documents\\Visual Studio 2017\\Projects\\Origin\\Origin\\obj\\",
+      "outputPath": "C:\\Users\\ivanp\\Desktop\\Origin\\.NET Core\\Origin\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

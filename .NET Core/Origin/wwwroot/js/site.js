@@ -18,6 +18,9 @@ function ViewModel(baseUrl) {
             getItem: self.baseUrl + "Item/GetItem",
             deleteItem: self.baseUrl + "Item/DeleteItem",
         },
+        itemTypes: {
+            getItemTypes: self.baseUrl + "ItemType/GetItemTypes"
+        },
         form: {
             getForm: self.baseUrl + "Form/GetForm"
         }
@@ -176,35 +179,6 @@ function ViewModel(baseUrl) {
         });
 
     };
-    self.getTables = function () {
-
-        self.isLoading(true);
-
-        var ajaxUrl = self.urls.general.getTables;
-        $.ajax({
-            type: "GET",
-            url: ajaxUrl,
-            cache: false,
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json',
-            success: function (viewModel) {
-                if (viewModel.resultInfo.result === 0) {
-                    self.tablesList.tables.removeAll();
-                    ko.utils.arrayForEach(viewModel.tables, function (table) {
-                        var tableToAdd = new TableViewModel();
-                        tableToAdd.setProperties(table, self.resources());
-                        self.tablesList.tables.push(tableToAdd);
-                    });
-                } else {
-                    self.isError(true);
-                    self.errorDetails = self.localizedText(viewModel.resultInfo.errorMessage);
-                }
-            },
-            complete: function () {
-                self.isLoading(false);
-            }
-        });
-    };
     self.getItem = function () {
 
         self.isLoading(true);
@@ -278,14 +252,14 @@ function ViewModel(baseUrl) {
         });
 
     }; // TODO adjust 
-
-    self.getTable = function () {
-
+    self.getItemTypes = function ()
+    {
         self.isLoading(true);
 
-        var ajaxUrl = self.urls.general.getTable,
+        var ajaxUrl = self.urls.itemType.getItemTypes,
             ajaxData = {
-                name: self.tableDetails.name(),
+                currentPage: self.itemsList.page(),
+                itemsPerPage: self.itemsList.pageDimension()
             };
         $.ajax({
             type: "POST",
@@ -295,18 +269,28 @@ function ViewModel(baseUrl) {
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             success: function (viewModel) {
-                if (viewModel.ResultInfo.Result === 0) {
-                    self.itemDetails.setProperties(viewModel.Item, self.resources());
+                if (viewModel.resultInfo.result === 0) {
+
+                    // set itemsList headers
+                    // TODO: Move in another call, it's useless that i get this data foreach call
+                    self.itemsList.Headers.removeAll();
+                    ko.utils.arrayForEach(viewModel.headers, function (header) {
+                        var headerToAdd = new HeaderViewModel();
+                        header.localizedName = self.localizedText("Section.ItemsList.Property." + header.name);
+                        headerToAdd.setProperties(header);
+                        self.itemsList.headers.push(headerToAdd);
+                    });
+
+                    self.addItemsToItemsList(viewModel);
                 } else {
                     self.isError(true);
-                    self.errorDetails = self.localizedText(viewModel.ResultInfo.ErrorMessage);
+                    //self.errorDetails = self.localizedText(viewModel.ResultInfo.ErrorMessage);
                 }
             },
             complete: function () {
                 self.isLoading(false);
             }
         });
-
     };
 
     /* =============== 2. ADD ============= */
@@ -474,6 +458,11 @@ function ViewModel(baseUrl) {
     self.onClickItemsList = function () {
         self.resetItemList();
         self.getItems();
+        self.toggleVisibilities("itemsList");
+    };
+    self.onClickItemTypesList = function () {
+        self.resetItemList();
+        self.getItemTypes();
         self.toggleVisibilities("itemsList");
     };
     self.onClickConfiguration = function () {

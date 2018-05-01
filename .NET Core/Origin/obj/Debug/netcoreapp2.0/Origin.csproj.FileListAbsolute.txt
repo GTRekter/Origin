@@ -35,3 +35,14 @@ C:\Users\ivanp\Documents\Visual Studio 2017\Projects\Origin\Origin\bin\Debug\net
 C:\Users\ivanp\Documents\Visual Studio 2017\Projects\Origin\Origin\bin\Debug\netcoreapp2.0\Origin.pdb
 C:\Users\ivanp\Documents\Visual Studio 2017\Projects\Origin\Origin\obj\Debug\netcoreapp2.0\Origin.dll
 C:\Users\ivanp\Documents\Visual Studio 2017\Projects\Origin\Origin\obj\Debug\netcoreapp2.0\Origin.pdb
+C:\Users\ivanp\Desktop\Origin\.NET Core\Origin\bin\Debug\netcoreapp2.0\Origin.deps.json
+C:\Users\ivanp\Desktop\Origin\.NET Core\Origin\bin\Debug\netcoreapp2.0\Origin.runtimeconfig.json
+C:\Users\ivanp\Desktop\Origin\.NET Core\Origin\bin\Debug\netcoreapp2.0\Origin.runtimeconfig.dev.json
+C:\Users\ivanp\Desktop\Origin\.NET Core\Origin\bin\Debug\netcoreapp2.0\Origin.dll
+C:\Users\ivanp\Desktop\Origin\.NET Core\Origin\bin\Debug\netcoreapp2.0\Origin.pdb
+C:\Users\ivanp\Desktop\Origin\.NET Core\Origin\obj\Debug\netcoreapp2.0\Origin.csprojResolveAssemblyReference.cache
+C:\Users\ivanp\Desktop\Origin\.NET Core\Origin\obj\Debug\netcoreapp2.0\Origin.csproj.CoreCompileInputs.cache
+C:\Users\ivanp\Desktop\Origin\.NET Core\Origin\obj\Debug\netcoreapp2.0\Origin.AssemblyInfoInputs.cache
+C:\Users\ivanp\Desktop\Origin\.NET Core\Origin\obj\Debug\netcoreapp2.0\Origin.AssemblyInfo.cs
+C:\Users\ivanp\Desktop\Origin\.NET Core\Origin\obj\Debug\netcoreapp2.0\Origin.dll
+C:\Users\ivanp\Desktop\Origin\.NET Core\Origin\obj\Debug\netcoreapp2.0\Origin.pdb

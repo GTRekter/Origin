@@ -1,38 +1,27 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Origin.Models.Store
 {
+    /// <summary>
+    /// It's the root where the Items and Action comes from
+    /// </summary>
     public class OR_ItemType
     {
+        #region Fields
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        private int _id;
-        private Guid _originId;
+        public int Id { get; set; }
+
+        public Guid OriginId { get; set; }
+
+        [Required(ErrorMessage = "A name is required")]
         private string _name;
 
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
+        #endregion
 
-        public Guid OriginId
-        {
-            get
-            {
-                return _originId;
-            }
-            set
-            {
-                _originId = value;
-            }
-        }
+        #region Properties
 
         public string Name
         {
@@ -42,8 +31,17 @@ namespace Origin.Models.Store
             }
             set
             {
-                _name = value;
+                if (String.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Invalid name");
+                }
+                else
+                {
+                    _name = value;
+                }
             }
         }
+
+        #endregion
     }
 }

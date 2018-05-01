@@ -7,16 +7,16 @@ using Origin.ViewModels.Requests;
 namespace Origin.Controllers
 {
     [Authorize]
-    public class ItemController : Controller
+    public class ItemTypeController : Controller
     {
         private readonly OriginDbContext _context;
 
-        private readonly ItemService _service;
+        private readonly ItemTypeService _service;
 
-        public ItemController(OriginDbContext context)
+        public ItemTypeController(OriginDbContext context)
         {
             _context = context;
-            _service = new ItemService(context);
+            _service = new ItemTypeService(context);
         }
 
         //[HttpPost]
@@ -34,9 +34,9 @@ namespace Origin.Controllers
         //}
 
         [HttpPost]
-        public JsonResult GetItems(GetItemsRequest request)
+        public JsonResult GetItemTypes(GetItemTypesRequest request)
         {
-            var viewModel = _service.GetItemsToList(request);
+            var viewModel = _service.GetItemTypesToList(request);
             return Json(viewModel);
         }
 

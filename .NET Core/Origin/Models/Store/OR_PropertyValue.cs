@@ -1,46 +1,44 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Origin.Models.Enums;
 
 namespace Origin.Models.Store
 {
-    public class OR_Input
+    public class OR_PropertyValue
     {
         #region Fields
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public Guid OriginId { get; set; }
+        [Required]
+        public Guid ItemOriginId { get; set; }
 
         [Required]
-        public Guid FormOriginId { get; set; }
+        public Guid PropertyOriginId { get; set; }
 
-        public InputType Type { get; set; }
-
-        [Required(ErrorMessage = "A name is required")]
-        private string _name;
+        [Required(ErrorMessage = "A value is required")]
+        private string _value;
 
         #endregion
 
         #region Properties
-
-        public string Name
+        
+        public string Value
         {
             get
             {
-                return _name;
+                return _value;
             }
             set
             {
                 if (String.IsNullOrEmpty(value))
                 {
-                    throw new Exception("Invalid name");
+                    throw new Exception("Invalid value");
                 }
                 else
                 {
-                    _name = value;
+                    _value = value;
                 }
             }
         }

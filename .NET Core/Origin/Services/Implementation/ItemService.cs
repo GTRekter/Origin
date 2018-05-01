@@ -4,32 +4,34 @@ using System.Collections.Generic;
 using Origin.ViewModel.Elements;
 using Origin.ViewModels.Requests;
 using Origin.ViewModels.Responses;
+using Origin.Models;
+using Origin.ViewModels;
 
 namespace Origin.Service.Implementation
 {
     class ItemService
     {
-        //#region Private
+        #region Private
 
-        //private OriginDbContext _dataContext;
+        private OriginDbContext _dataContext;
 
         //private Configuration _configuration;
 
         //private string _localizationErrorKey;
 
-        //#endregion
+        #endregion
 
-        //#region Constructor
+        #region Constructor
+      
+        public ItemService(OriginDbContext context)
+        {
+            _dataContext = context;
+           // _configuration = configurationService.GetConfiguration();
+           // TODO: mettere in configurazione
+           //_localizationErrorKey = "General.Configuration.Error.";
+        }
 
-        //public ItemService()
-        //{
-        //    _dataContext = new OriginDbContext();
-        //    //_configuration = configurationService.GetConfiguration();
-        //    // TODO: mettere in configurazione
-        //    _localizationErrorKey = "General.Configuration.Error.";
-        //}
-
-        //#endregion
+        #endregion
 
         //#region Public Methods
 
@@ -80,67 +82,65 @@ namespace Origin.Service.Implementation
         //    return viewModel;
         //}
 
-        //public GetItemsResponse GetItems(GetItemsRequest request)
-        //{
-        //    GetItemsResponse viewModel = new GetItemsResponse();
+        public GetItemsResponse GetItemsToList(GetItemsRequest request)
+        {
+            GetItemsResponse viewModel = new GetItemsResponse();
 
-        //    try
-        //    {
-        //        var viewedItems = request.CurrentPage * request.ItemsPerPage;
+            try
+            {
+                var viewedItems = request.CurrentPage * request.ItemsPerPage;
 
-        //        // If the list isn't configurated in the settings, the application will not show it
-        //        if (!_configuration.ItemLists.ItemLists.Any(il => il.ItemTypeOriginId.Equals(request.ItemTypeOriginId)))
-        //        {
-        //            throw new Exception(string.Format("{0}{1}", _localizationErrorKey, "ListNotConfigurated"));
-        //        }
+                // If the list isn't configurated in the settings, the application will not show it
+                //if (!_configuration.ItemLists.ItemLists.Any(il => il.ItemTypeOriginId.Equals(request.ItemTypeOriginId)))
+                //{
+                //    throw new Exception(string.Format("{0}{1}", _localizationErrorKey, "ListNotConfigurated"));
+                //}
 
-        //        viewModel.Headers = _configuration.ItemLists.ItemLists
-        //                                .Single(il => il.ItemTypeOriginId.Equals(request.ItemTypeOriginId))
-        //                                .VisibleFields.Select(vf => new GetItemsResponse.Header()
-        //                                {
-        //                                    Name = vf.Name
-        //                                })
-        //                                .OrderBy(vf => vf.Name)
-        //                                .ToList();
+                //viewModel.Headers = _configuration.ItemLists.ItemLists
+                //                        .Single(il => il.ItemTypeOriginId.Equals(request.ItemTypeOriginId))
+                //                        .VisibleFields.Select(vf => new GetItemsResponse.Header()
+                //                        {
+                //                            Name = vf.Name
+                //                        })
+                //                        .OrderBy(vf => vf.Name)
+                //                        .ToList();
 
-        //        viewModel.Items = _dataContext.OR_Items
-        //                            .OrderByDescending(i => i.CreationDate)
-        //                            .Skip(viewedItems).Take(request.ItemsPerPage)
-        //                            .Where(i => i.ItemTypeOriginId.Equals(request.ItemTypeOriginId))
-        //                            .Select(i => new GetItemsResponse.Item()
-        //                            {
-        //                                Id = i.Id,
-        //                                OriginId = i.OriginId.ToString(),
-        //                                ItemTypeOriginId = i.ItemTypeOriginId.ToString(),
-        //                                CreationDate = FormatDate(i.CreationDate),
-        //                                LastEditDate = FormatDate(i.LastEditDate),
-        //                                Properties = _dataContext.OR_Properties
-        //                                                .Where(p => p.RelatedOriginId == i.OriginId)
-        //                                                .Where(p => _configuration.ItemLists.ItemLists
-        //                                                                .Single(il => il.ItemTypeOriginId.Equals(request.ItemTypeOriginId))
-        //                                                                .VisibleFields.Select(vf => vf.Name).ToList()
-        //                                                                .Contains(p.Name))
-        //                                                .Select(p => new GetItemsResponse.Property()
-        //                                                {
-        //                                                    Id = p.Id,
-        //                                                    OriginId = p.OriginId.ToString(),
-        //                                                    Name = p.Name,
-        //                                                    Value = p.Value
-        //                                                })
-        //                                                .OrderBy(p => p.Name)
-        //                                                .ToList()
-        //                            })
-        //                            .ToList();
+                viewModel.Items = _dataContext.OR_Items
+                                    .OrderByDescending(i => i.CreationDate)
+                                    .Skip(viewedItems).Take(request.ItemsPerPage)
+                                    .Where(i => i.ItemTypeOriginId.Equals(request.ItemTypeOriginId))
+                                    .Select(i => new GetItemsResponse.Item()
+                                    {
+                                        Id = i.Id,
+                                        OriginId = i.OriginId.ToString(),
+                                        ItemTypeOriginId = i.ItemTypeOriginId.ToString(),
+                                        CreationDate = FormatDate(i.CreationDate),
+                                        LastEditDate = FormatDate(i.LastEditDate),
+                                        Properties = _dataContext.OR_PropertyValues
+                                                                .Where(pv => pv.ItemOriginId == i.OriginId)
+                                                                .Join(_dataContext.OR_Properties,
+                                                                        value => value.PropertyOriginId,
+                                                                        property => property.OriginId,
+                                                                        (value, property) => new GetItemsResponse.Property()
+                                                                        {
+                                                                            Id = property.Id,
+                                                                            OriginId = property.OriginId.ToString(),
+                                                                            Name = property.Name,
+                                                                            Value = value.Value
+                                                                        })
+                                                                .OrderBy(p => p.Name)
+                                                                .ToList()
+                                    })
+                                    .ToList();
+            }
+            catch (Exception exc)
+            {
+                viewModel.ResultInfo.Result = Base.ResultInfoDto.ResultEnum.Error;
+                viewModel.ResultInfo.ErrorMessage = exc.Message;
+            }
 
-        //    }
-        //    catch (Exception exc)
-        //    {
-        //        viewModel.ResultInfo.Result = Base.ResultInfoDto.ResultEnum.Error;
-        //        viewModel.ResultInfo.ErrorMessage = exc.Message;
-        //    }
-
-        //    return viewModel;
-        //}
+            return viewModel;
+        }
 
         //public GetItemResponse GetItem(GetItemRequest request)
         //{
@@ -281,14 +281,14 @@ namespace Origin.Service.Implementation
 
         //#endregion
 
-        //#region Private Methods
+        #region Private Methods
 
-        //private GetLookupResponse GetLookup(string name)
-        //{
-        //    GetLookupResponse viewModel = new GetLookupResponse();
+        private GetLookupResponse GetLookup(string name)
+        {
+            GetLookupResponse viewModel = new GetLookupResponse();
 
-        //    return viewModel;
-        //}
+            return viewModel;
+        }
 
         //private OR_ItemType GetItemType(string name)
         //{
@@ -298,11 +298,13 @@ namespace Origin.Service.Implementation
         //    return itemType;
         //}
 
-        //private string FormatDate(DateTime date)
-        //{
-        //    return date.ToString(_configuration.Date.Format);
-        //}
+        private string FormatDate(DateTime date)
+        {
+            // TODO: put in a UI configuration file
+            //return date.ToString(_configuration.Date.Format);
+            return date.ToString();
+        }
 
-        //#endregion
+        #endregion
     }
 }
