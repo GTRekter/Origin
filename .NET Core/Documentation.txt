@@ -3,5 +3,5 @@ Add-migration: It will scaffold the next migration for the changes you have made
 Update-database: It will apply pending changes to the database based on latest scaffolding code file you created using "Add-Migration" command
 
 example:
-Add-migration -context OriginDbContext
+add-migration -context OriginDbContext
 update-database -context OriginDbContext
